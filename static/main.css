@@ -25,7 +25,6 @@ body {
   flex-direction: column;
   align-items: center;
   padding-top: 5px;
-  background-image: url("C:/Users/ptaka/OneDrive/Desktop/repos/PlantSage/PlantSage/static/background_grass2.jpeg");
 }
 .icon {
   width: 100px;
@@ -47,12 +46,14 @@ input[type="text"] {
   border: 1px solid #027a4f;
   border-radius: 4px;
   margin-bottom: 24px;
+  text-align: center;
 }
 ::placeholder {
   color: #8e8ea0;
   opacity: 1;
 }
 input[type="submit"] {
+  width: 200px;
   padding: 12px 0;
   color: #fff;
   background-color: #027a4f;
@@ -60,6 +61,7 @@ input[type="submit"] {
   border-radius: 4px;
   text-align: center;
   cursor: pointer;
+  margin: 0 auto;
   margin-bottom: 20px;
 }
 div[class="plant_description"] {
@@ -83,7 +85,8 @@ table {
   overflow: hidden;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   margin-left:60px;
-  margin-right 60px;
+  margin-right:60px;
+  margin-bottom: 60px;
 }
 th, td {
   border: 1px solid black;
@@ -93,4 +96,16 @@ th, td {
 }
 td:nth-child(1){
   text-align: center;
+}
+td:nth-child(2){
+  text-align: center;
+}
+tr.environment {
+  background-color: #8fd6d7;
+}
+tr.planting {
+  background-color: #b3d6a8;
+}
+tr.care {
+  background-color: #d8c3a8;
 }
