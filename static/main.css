@@ -25,6 +25,7 @@ body {
   flex-direction: column;
   align-items: center;
   padding-top: 5px;
+  background-image: url("C:/Users/ptaka/OneDrive/Desktop/repos/PlantSage/PlantSage/static/background_grass2.jpeg");
 }
 .icon {
   width: 100px;
@@ -66,7 +67,6 @@ div[class="plant_description"] {
   margin-bottom: 30px;
   text-indent: 5%;
 }
-
 h2 {
   font-size: 20px;
   margin-top: 40px;
@@ -85,7 +85,6 @@ table {
   margin-left:60px;
   margin-right 60px;
 }
-
 th, td {
   border: 1px solid black;
   padding: 8px;
