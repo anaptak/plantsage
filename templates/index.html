@@ -18,27 +18,61 @@
     <table class="result">
       <tbody>
         <div class="plant_description">{{ plant_description }}</div>
+
         <tr class="environment">
-        <td rowspan="4">Environment</td>
-        {% for condition in conditions[:4] %}
-          <td><b>{{ condition.type }}</b></td>
-          <td>{{ condition.answer }}</td>
+          <td rowspan="4">Environment</td>
+          <td class="col2_env"><b>{{ conditions[0].type }}</b></td>
+          <td class="col3_env">{{ conditions[0].answer }}</td>
         </tr>
-        {% endfor %}
+        <tr class="environment">
+          <td class="col2_env"><b>{{ conditions[1].type }}</b></td>
+          <td class="col3_env">{{ conditions[1].answer }}</td>
+        </tr>
+        <tr class="environment">
+          <td class="col2_env"><b>{{ conditions[2].type }}</b></td>
+          <td class="col3_env">{{ conditions[2].answer }}</td>
+        </tr>
+        <tr class="environment">
+          <td class="col2_env"><b>{{ conditions[3].type }}</b></td>
+          <td class="col3_env">{{ conditions[3].answer }}</td>
+        </tr>
+
         <tr class="planting">
-        <td rowspan="4">Planting</td>
-        {% for condition in conditions[4:8] %}
-          <td><b>{{ condition.type }}</b></td>
-          <td>{{ condition.answer }}</td>
+          <td rowspan="4">Planting</td>
+          <td class="col2_pl"><b>{{ conditions[4].type }}</b></td>
+          <td class="col3_pl">{{ conditions[4].answer }}</td>
         </tr>
-        {% endfor %}
+        <tr class="planting">
+          <td class="col2_pl"><b>{{ conditions[5].type }}</b></td>
+          <td class="col3_pl">{{ conditions[5].answer }}</td>
+        </tr>
+        <tr class="planting">
+          <td class="col2_pl"><b>{{ conditions[6].type }}</b></td>
+          <td class="col3_pl">{{ conditions[6].answer }}</td>
+        </tr>
+        <tr class="planting">
+          <td class="col2_pl"><b>{{ conditions[7].type }}</b></td>
+          <td class="col3_pl">{{ conditions[7].answer }}</td>
+        </tr>
+
         <tr class="care">
-        <td rowspan="4">Care</td>
-        {% for condition in conditions[8:12] %}
-          <td><b>{{ condition.type }}</b></td>
-          <td>{{ condition.answer }}</td>
+          <td rowspan="4">Care</td>
+          <td class="col2_ca"><b>{{ conditions[8].type }}</b></td>
+          <td class="col3_ca">{{ conditions[8].answer }}</td>
         </tr>
-        {% endfor %}
+        <tr class="care">
+          <td class="col2_ca"><b>{{ conditions[9].type }}</b></td>
+          <td class="col3_ca">{{ conditions[9].answer }}</td>
+        </tr>
+        <tr class="care">
+          <td class="col2_ca"><b>{{ conditions[10].type }}</b></td>
+          <td class="col3_ca">{{ conditions[10].answer }}</td>
+        </tr>
+        <tr class="care">
+          <td class="col2_ca"><b>{{ conditions[11].type }}</b></td>
+          <td class="col3_ca">{{ conditions[11].answer }}</td>
+        </tr>
+
       </tbody>
     </table>
   {% endif %}

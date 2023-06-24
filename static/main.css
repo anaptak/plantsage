@@ -109,3 +109,24 @@ tr.planting {
 tr.care {
   background-color: #d8c3a8;
 }
+td.col2_env {
+  background-color: #e8f6f7;
+}
+td.col2_pl {	
+  background-color: #e2efdd;
+}
+td.col2_ca {
+  background-color: #f0e8de;
+}
+td.col3_env {
+  text-align: left;
+  background-color: #e8f6f7;
+}
+td.col3_pl {
+  text-align: left;
+  background-color: #e2efdd;
+}
+td.col3_ca {
+  text-align: left;
+  background-color: #f0e8de;
+}
