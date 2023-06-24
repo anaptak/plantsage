@@ -90,7 +90,7 @@ table {
 }
 th, td {
   border: 1px solid black;
-  padding: 8px;
+  padding: 12px;
   margin-left:60px;
   margin-right 60px;
 }
@@ -111,22 +111,28 @@ tr.care {
 }
 td.col2_env {
   background-color: #e8f6f7;
+  font-size: smaller;
 }
 td.col2_pl {	
   background-color: #e2efdd;
+  font-size: smaller;
 }
 td.col2_ca {
   background-color: #f0e8de;
+  font-size: smaller;
 }
 td.col3_env {
   text-align: left;
   background-color: #e8f6f7;
+  font-size: smaller;
 }
 td.col3_pl {
   text-align: left;
   background-color: #e2efdd;
+  font-size: smaller;
 }
 td.col3_ca {
   text-align: left;
   background-color: #f0e8de;
+  font-size: smaller;
 }
