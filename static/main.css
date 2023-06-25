@@ -90,7 +90,10 @@ table {
 }
 th, td {
   border: 1px solid black;
-  padding: 12px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
   margin-left:60px;
   margin-right 60px;
 }
