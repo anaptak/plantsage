@@ -14,16 +14,23 @@
   </style>
 </head>
 
+
 <body>
+  
   <img src="{{ url_for('static', filename='plantsage_logo_transparent.PNG') }}" class="icon" />
   <h3>Plant Sage</h3>
+  
   <form action="/" method="post">
     <input type="text" name="plant" placeholder="Enter the Name of a Plant" required />
     <input type="submit" value="Get Info" />
- {% if conditions %}
- <div class="dirt"><i>Here's the dirt on...</i></div>
+ 
+    {% if conditions %}
+   
+    <div class="dirt"><i>Here's the dirt on...</i></div>
     <h2>{{ request.form.plant }}</h2>
     <div class="plant_description">{{ plant_description }}</div>
+
+
     <table class="result">
       <tbody>
 
@@ -83,6 +90,9 @@
 
       </tbody>
     </table>
+
   {% endif %}
+
 </body>
+
 </html>
