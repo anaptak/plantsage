@@ -40,7 +40,7 @@ def parse_conditions(result):
         {"type": "Soil Mixture", "answer": ""},
         {"type": "pH", "answer": ""},
         {"type": "Root System", "answer": ""},
-        {"type": "Watering Instructions", "answer": ""},
+        {"type": "Water", "answer": ""},
         {"type": "Soil Moisture", "answer": ""},
         {"type": "Fertilization", "answer": ""},
         {"type": "Grow Notes", "answer": ""}
