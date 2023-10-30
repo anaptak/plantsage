@@ -13,6 +13,7 @@
   font-weight: bold;
   font-style: normal;
 }
+
 body,
 input {
   font-size: 16px;
@@ -89,7 +90,7 @@ h2 {
 .result {
   font-weight: normal;
   margin-left:60px;
-  margin-right 60px;
+  margin-right: 60px;
 }
 table {
   border-collapse: collapse;
@@ -108,7 +109,7 @@ th, td {
   padding-left: 20px;
   padding-right: 20px;
   margin-left:60px;
-  margin-right 60px;
+  margin-right: 60px;
 }
 td:nth-child(1){
   text-align: center;
