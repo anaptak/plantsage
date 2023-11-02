@@ -14,7 +14,6 @@
   </style>
 </head>
 
-
 <body>
   
   <img src="{{ url_for('static', filename='plantsage_logo.PNG') }}" class="icon" />
@@ -30,7 +29,6 @@
     <div class="dirt"><i>Here's the dirt on...</i></div>
     <h2>{{ request.form.plant }}</h2>
     <div class="plant_description">{{ plant_description }}</div>
-
 
     <table class="result">
       <tbody>
@@ -91,9 +89,6 @@
 
       </tbody>
     </table>
-
   {% endif %}
-
 </body>
-
 </html>
