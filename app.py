@@ -5,7 +5,6 @@ from flask import Flask, redirect, render_template, request, url_for
 app = Flask(__name__)
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-
 @app.route("/", methods=("GET", "POST"))
 def index():
     if request.method == "POST":
@@ -24,7 +23,6 @@ def index():
 
     result = request.args.get("result")
     return render_template("index.html", conditions=None)
-
 
 def generate_prompt(plant):
     return """For {}, print description for plant around 200 words long, good light intensity, daylight hours, temperature (fahrenheit only), air moisture (high/medium/low, comma, percentage range), soil type, soil mixture recommendation, pH, root system (e.g. deep/shallow but can be more descriptive), watering instructions (including how often to water), soil moisture, fertilization recommendations, and extra notes (about growing this plant) around 200 words long. Display the information in the following parameters in this strict specific order and format (condition: chatgptanswer,) and strictly maintaining exact parameter names: Description, Light Intensity (text with no numbers, use words like bright/full/shade), Daylight Hours, Temperature, Air Moisture, Soil Type, Soil Mixture, pH, Root System, Watering Instructions, Soil Moisture, Fertilization, Grow Notes. Data displayed for these conditions should not contradict each other. If a plant is fictional, come up with appropriate humorous values directly related to their fictional background.""".format(plant.capitalize())
@@ -56,7 +54,6 @@ def parse_conditions(result):
                 condition["answer"] = answer
                 break
 
-    #plant_description = conditions[0]["answer"]
     plant_description = conditions.pop(0)["answer"]
 
     return conditions, plant_description
