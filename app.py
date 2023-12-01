@@ -45,7 +45,6 @@ def parse_conditions(result):
     ]
 
     lines = result.split("<br>")
-
     for line in lines:
         for condition in conditions:
             if condition["type"] in line:
