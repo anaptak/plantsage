@@ -10,7 +10,7 @@ def index():
     if request.method == "POST":
         plant = request.form["plant"]
         response = openai.Completion.create(
-            model="text-davinci-003",
+            model="gpt-3.5-turbo",
             prompt=generate_prompt(plant),
             max_tokens=400,
             n=1,
