@@ -1,23 +1,29 @@
 import os
 import openai
 from flask import Flask, redirect, render_template, request, url_for
+from dotenv import load_dotenv  # Ensure this is imported
 
 app = Flask(__name__)
+load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
+
+if not openai.api_key:
+    raise ValueError("No OPENAI_API_KEY found in environment!")
 
 @app.route("/", methods=("GET", "POST"))
 def index():
     if request.method == "POST":
         plant = request.form["plant"]
-        response = openai.Completion.create(
+        response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
-            prompt=generate_prompt(plant),
+            messages=[
+                {"role": "system", "content": "You are a bot that provides structured plant care information."},
+                {"role": "user", "content": generate_prompt(plant)}
+            ],
             max_tokens=400,
-            n=1,
-            stop=None,
             temperature=0,
         )
-        result = response.choices[0].text.replace("\n", "<br>")
+        result = response.choices[0]["message"]["content"].replace("\n", "<br>")  # Fixed
         conditions, plant_description = parse_conditions(result)
         return render_template("index.html", conditions=conditions, plant_description=plant_description)
 
@@ -56,4 +62,3 @@ def parse_conditions(result):
     plant_description = conditions.pop(0)["answer"]
 
     return conditions, plant_description
-
