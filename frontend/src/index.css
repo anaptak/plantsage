@@ -62,6 +62,10 @@ a:hover {
 }
 
 body {
+  background-image: url("/sky_grass.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   margin: 0;
   display: flex;
   place-items: center;
