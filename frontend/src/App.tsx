@@ -15,13 +15,12 @@ function App() {
       <h1>Plant Sage</h1>
 
       <div className="flex justify-center my-4">
-        <Input placeholder="Enter the Name of a Plant" className="w-64" />
+        <Input placeholder="Enter the Name of a Plant"
+        className="w-64 bg-gray-50 text-stone-950 border border-gray-300 rounded-md" />
       </div>
 
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+        <button type="button">Get Info</button>
       </div>
     </>
   )

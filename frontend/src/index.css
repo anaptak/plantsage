@@ -64,7 +64,7 @@ a:hover {
 body {
   background-image: url("/sky_grass.png");
   background-size: cover;
-  background-position: center;
+  background-position: bottom;
   background-repeat: no-repeat;
   margin: 0;
   display: flex;
@@ -74,7 +74,7 @@ body {
 }
 
 h1 {
-  font-size: 4em;
+  font-size: 3em;
   line-height: 1;
 }
 
@@ -90,7 +90,7 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #f8f5ea;
 }
 button:focus,
 button:focus-visible {
@@ -102,11 +102,9 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
-  a:hover {
-    color: #747bff;
-  }
   button {
-    background-color: #f9f9f9;
+    background-color: #027A4F;
+    color: #f8f5ea;
   }
 }
 
