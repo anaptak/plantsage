@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 import plantsageLogo from './assets/plantsage_logo.PNG'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [plantName, setPlantName] = useState('');
+  const [responseData, setResponseData] = useState('');
 
   return (
     <>
