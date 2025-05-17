@@ -55,13 +55,15 @@ function App() {
     <div className="app-container">
       <div className="center-container">
         <img src={plantsageLogo} className="logo" alt="PlantSage Logo" />
+        <h1 className="title">Plant Sage</h1>
         <Input
+          classnName="input"
           type="text"
           value={plantName}
           onChange={(e) => setPlantName(e.target.value)}
-          placeholder="Enter plant name..."
+          placeholder="Enter the Name of a Plant"
         />
-        <Button onClick={handleSubmit}>Get Info</Button>
+        <Button className="get-info-button" onClick={handleSubmit}>Get Info</Button>
         {renderTable()}
       </div>
     </div>
