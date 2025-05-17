@@ -1,3 +1,4 @@
+import re
 import os
 import json
 from openai import OpenAI
@@ -59,7 +60,8 @@ def query_plant(plant: str):
             messages=[{"role": "user", "content": prompt}]
         )
         raw_content = response.choices[0].message.content
-        structured_info = json.loads(raw_content)
+        cleaned = re.sub(r"^```(?:json)?|```$", "", raw_content.strip(), flags=re.MULTILINE).strip()
+        structured_info = json.loads(cleaned)
         return structured_info
     except Exception as e:
         return {"error": str(e)}
