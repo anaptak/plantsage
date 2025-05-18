@@ -56,8 +56,8 @@ function App() {
       <div className="flex flex-col items-center justify-center h-[30vh] text-center">
         <img 
           src={plantsageLogo} 
-          className="logo" 
-          alt="PlantSage Logo" />
+          alt="PlantSage Logo"
+          className="w-24 h-24 mb-4" />
         <h1 className="title">Plant Sage</h1>
         <Input
           type="text"
@@ -66,7 +66,11 @@ function App() {
           placeholder="Enter the Name of a Plant"
           className="h-14 text-base px-4 rounded-xl w-[260px] shadow-sm border border-gray-300"
         />
-        <Button className="get-info-button" onClick={handleSubmit}>Get Info</Button>
+        <Button 
+          onClick={handleSubmit}
+          className="mt-3 px-6 py-3 text-base bg-[#18794e] text-white rounded-[10px] shadow hover:bg-[#145e3f]">
+          Get Info
+        </Button>
         {renderTable()}
       </div>
     </div>

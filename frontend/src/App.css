@@ -1,21 +1,3 @@
-
-.logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 6em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #ede9db);
-}
-
-.table-container {
-  margin-top: 20px;
-}
-
 table {
   width: 100%;
   border-collapse: collapse;
