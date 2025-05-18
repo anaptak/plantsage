@@ -18,20 +18,3 @@ td.key {
 td.value {
   width: 60%;
 }
-
-.get-info-button {
-  margin-top: 0.75rem;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  background-color: #18794e;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: background-color 0.3s ease;
-}
-
-.get-info-button:hover {
-  background-color: #145e3f;
-}
