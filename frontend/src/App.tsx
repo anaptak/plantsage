@@ -27,7 +27,7 @@ function App() {
     const sectionOrder = ["environment", "planting", "care"];
 
     return (
-      <div className="table-container">
+      <div className="flex items-center justify-center h-screen text-center max-w-screen-xl mx-auto p-8">
         {sectionOrder.map((section) => (
           <div key={section}>
             <h2>{section.charAt(0).toUpperCase() + section.slice(1)}</h2>
@@ -52,9 +52,12 @@ function App() {
   };
 
   return (
-    <div className="app-container">
-      <div className="center-container">
-        <img src={plantsageLogo} className="logo" alt="PlantSage Logo" />
+    <div className="flex items-center justify-center h-screen bg-[url('/sky_grass.png')] bg-no-repeat bg-center bg-cover text-center max-w-screen-xl mx-auto p-8">
+      <div className="flex flex-col items-center justify-center h-[30vh] text-center">
+        <img 
+          src={plantsageLogo} 
+          alt="PlantSage Logo"
+          className="w-24 h-24 mb-4" />
         <h1 className="title">Plant Sage</h1>
         <Input
           type="text"
@@ -63,7 +66,11 @@ function App() {
           placeholder="Enter the Name of a Plant"
           className="h-14 text-base px-4 rounded-xl w-[260px] shadow-sm border border-gray-300"
         />
-        <Button className="get-info-button" onClick={handleSubmit}>Get Info</Button>
+        <Button 
+          onClick={handleSubmit}
+          className="mt-3 px-6 py-3 text-base bg-[#18794e] text-white rounded-[10px] shadow hover:bg-[#145e3f]">
+          Get Info
+        </Button>
         {renderTable()}
       </div>
     </div>
