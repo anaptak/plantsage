@@ -58,17 +58,19 @@ function App() {
           src={plantsageLogo} 
           alt="PlantSage Logo"
           className="w-24 h-24 mb-4" />
-        <h1 className="title">Plant Sage</h1>
+        <h1 className="text-[3rem] font-bold text-[#2c4539] mb-4 tracking-wide [text-shadow:1px_1px_2px_rgba(0,0,0,0.05)] font-['Playfair_Display']">
+          Plant Sage
+        </h1>
         <Input
           type="text"
           value={plantName}
           onChange={(e) => setPlantName(e.target.value)}
           placeholder="Enter the Name of a Plant"
-          className="h-14 text-base px-4 rounded-xl w-[260px] shadow-sm border border-gray-300"
+          className="h-14 text-base px-4 py-3 rounded-xl w-[260px] shadow-sm border border-[#18794e] bg-white"
         />
         <Button 
           onClick={handleSubmit}
-          className="mt-3 px-6 py-3 text-base bg-[#18794e] text-white rounded-[10px] shadow hover:bg-[#145e3f]">
+          className="mt-3 px-6 py-3 text-base bg-[#18794e] text-white rounded-[10px] shadow hover:bg-[#2c4539]">
           Get Info
         </Button>
         {renderTable()}
