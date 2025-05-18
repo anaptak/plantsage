@@ -27,7 +27,7 @@ function App() {
     const sectionOrder = ["environment", "planting", "care"];
 
     return (
-      <div className="table-container">
+      <div className="flex items-center justify-center h-screen text-center max-w-screen-xl mx-auto p-8">
         {sectionOrder.map((section) => (
           <div key={section}>
             <h2>{section.charAt(0).toUpperCase() + section.slice(1)}</h2>
@@ -52,9 +52,12 @@ function App() {
   };
 
   return (
-    <div className="app-container">
-      <div className="center-container">
-        <img src={plantsageLogo} className="logo" alt="PlantSage Logo" />
+    <div className="flex items-center justify-center h-screen bg-[url('/sky_grass.png')] bg-no-repeat bg-center bg-cover text-center max-w-screen-xl mx-auto p-8">
+      <div className="flex flex-col items-center justify-center h-[30vh] text-center">
+        <img 
+          src={plantsageLogo} 
+          className="logo" 
+          alt="PlantSage Logo" />
         <h1 className="title">Plant Sage</h1>
         <Input
           type="text"
