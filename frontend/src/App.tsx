@@ -48,7 +48,7 @@ function App() {
 
     return (
       <div className="overflow-x-auto w-full px-4 py-12">
-        <table className="w-full table-auto border border-gray-300 rounded-xl overflow-hidden shadow">
+        <table className="w-[90%] max-w-4xl table-auto mx-auto border border-gray-300 rounded-xl overflow-hidden shadow">
           <tbody>
             {sectionOrder.map((section) => {
               const entries = Object.entries(responseData[section]);
@@ -62,20 +62,20 @@ function App() {
                     {isFirstRow && (
                       <td
                         rowSpan={entries.length}
-                        className={`text-center align-middle font-semibold text-gray-800 px-4 py-2 border border-gray-300 w-1/5`}
+                        className={`text-center align-middle font-semibold text-sm text-gray-800 px-3 py-1.5 border border-gray-300 w-1/5`}
                         style={{ backgroundColor: darkBg }}
                       >
                         {sectionLabels[section]}
                       </td>
                     )}
                     <td 
-                      className={`px-4 py-2 font-semibold text-gray-900 border border-gray-300 w-1/4`}
+                      className={`px-3 py-1.5 font-semibold text-sm text-gray-900 border border-gray-300 w-1/4`}
                       style={{ backgroundColor: lightBg }}
                     >
                       {formatKey(key)}
                     </td>
                     <td 
-                      className={`px-4 py-2 text-gray-800 border border-gray-300 w-1/2`}
+                      className={`px-3 py-1.5 text-sm text-gray-800 border border-gray-300 w-1/2`}
                       style={{ backgroundColor: lightBg }}
                     >
                       {value}
