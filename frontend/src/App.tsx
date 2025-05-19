@@ -35,15 +35,15 @@ function App() {
     };
 
     const sectionDarkColors: Record<string, string> = {
-      environment: "bg-cyan-400",
-      planting: "bg-green-400",
-      care: "bg-amber-300",
+      environment: "#8ed7d5",
+      planting: "#b1d6a8",
+      care: "#d7c3a8"
     };
 
     const sectionLightColors: Record<string, string> = {
-      environment: "bg-cyan-100",
-      planting: "bg-green-100",
-      care: "bg-amber-100",
+      environment: "#e9f6f8",
+      planting: "#e2eedd",
+      care: "#efe8df"
     };
 
     return (
@@ -62,15 +62,22 @@ function App() {
                     {isFirstRow && (
                       <td
                         rowSpan={entries.length}
-                        className={`text-center align-middle font-semibold text-gray-800 px-4 py-2 border border-gray-300 w-1/5 ${darkBg}`}
+                        className={`text-center align-middle font-semibold text-gray-800 px-4 py-2 border border-gray-300 w-1/5`}
+                        style={{ backgroundColor: darkBg }}
                       >
                         {sectionLabels[section]}
                       </td>
                     )}
-                    <td className={`px-4 py-2 font-semibold text-gray-900 border border-gray-300 w-1/4 ${lightBg}`}>
+                    <td 
+                      className={`px-4 py-2 font-semibold text-gray-900 border border-gray-300 w-1/4`}
+                      style={{ backgroundColor: lightBg }}
+                    >
                       {formatKey(key)}
                     </td>
-                    <td className={`px-4 py-2 text-gray-800 border border-gray-300 w-1/2 ${lightBg}`}>
+                    <td 
+                      className={`px-4 py-2 text-gray-800 border border-gray-300 w-1/2`}
+                      style={{ backgroundColor: lightBg }}
+                    >
                       {value}
                     </td>
                   </tr>
