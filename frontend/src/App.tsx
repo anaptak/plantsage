@@ -22,33 +22,60 @@ function App() {
       console.error(err);
       setResponseData({ error: "Could not fetch plant info." });
     }
-  };
+  }
 
   const renderTable = () => {
     if (!responseData || responseData.error) return null;
 
     const sectionOrder = ["environment", "planting", "care"];
+    const sectionLabels: Record<string, string> = {
+      environment: "Environment",
+      planting: "Planting",
+      care: "Care",
+    };
+
+    const sectionColors: Record<string, string> = {
+      environment: "bg-cyan-100",
+      planting: "bg-green-100",
+      care: "bg-amber-100",
+    };
 
     return (
-      <div className="flex items-center justify-center h-screen text-center max-w-screen-xl mx-auto p-8">
-        {sectionOrder.map((section) => (
-          <div key={section}>
-            <h2>{section.charAt(0).toUpperCase() + section.slice(1)}</h2>
-            <table>
-              <tbody>
-                {Object.entries(responseData[section]).map(([key, value]) => (
-                  <tr key={key}>
-                    <td className="key">{formatKey(key)}</td>
-                    <td className="value">{value}</td>
+      <div className="overflow-x-auto w-full px-4 py-12">
+        <table className="w-full table-auto border border-gray-300 rounded-xl overflow-hidden shadow">
+          <tbody>
+            {sectionOrder.map((section) => {
+              const entries = Object.entries(responseData[section]);
+              return entries.map(([key, value], idx) => {
+                const isFirstRow = idx === 0;
+                const sectionClass = sectionColors[section];
+
+                return (
+                  <tr key={key} className={`${sectionClass} border-t`}>
+                    {isFirstRow && (
+                      <td
+                        rowSpan={entries.length}
+                        className={`text-center align-middle font-semibold text-gray-700 px-4 py-2 border border-gray-300 w-1/5 ${sectionClass}`}
+                      >
+                        {sectionLabels[section]}
+                      </td>
+                    )}
+                    <td className="px-4 py-2 font-bold text-gray-800 border border-gray-300 w-1/4">
+                      {formatKey(key)}
+                    </td>
+                    <td className="px-4 py-2 text-gray-800 border border-gray-300 w-1/2">
+                      {value}
+                    </td>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        ))}
+                );
+              });
+            })}
+          </tbody>
+        </table>
       </div>
     );
   };
+ 
 
   const formatKey = (key: string) => {
     return key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
