@@ -22,30 +22,70 @@ function App() {
       console.error(err);
       setResponseData({ error: "Could not fetch plant info." });
     }
-  };
+  }
 
   const renderTable = () => {
     if (!responseData || responseData.error) return null;
 
     const sectionOrder = ["environment", "planting", "care"];
+    const sectionLabels: Record<string, string> = {
+      environment: "Environment",
+      planting: "Planting",
+      care: "Care",
+    };
+
+    const sectionDarkColors: Record<string, string> = {
+      environment: "#8ed7d5",
+      planting: "#b1d6a8",
+      care: "#d7c3a8"
+    };
+
+    const sectionLightColors: Record<string, string> = {
+      environment: "#e9f6f8",
+      planting: "#e2eedd",
+      care: "#efe8df"
+    };
 
     return (
-      <div className="flex items-center justify-center h-screen text-center max-w-screen-xl mx-auto p-8">
-        {sectionOrder.map((section) => (
-          <div key={section}>
-            <h2>{section.charAt(0).toUpperCase() + section.slice(1)}</h2>
-            <table>
-              <tbody>
-                {Object.entries(responseData[section]).map(([key, value]) => (
+      <div className="overflow-x-auto w-full px-4 py-12">
+        <table className="w-[90%] max-w-4xl table-auto mx-auto border-separate border-spacing-0 !border-[2px] !border-gray-800 rounded-xl overflow-hidden shadow">
+          <tbody>
+            {sectionOrder.map((section) => {
+              const entries = Object.entries(responseData[section]);
+              return entries.map(([key, value], idx) => {
+                const isFirstRow = idx === 0;
+                const darkBg = sectionDarkColors[section];
+                const lightBg = sectionLightColors[section];
+
+                return (
                   <tr key={key}>
-                    <td className="key">{formatKey(key)}</td>
-                    <td className="value">{value}</td>
+                    {isFirstRow && (
+                      <td
+                        rowSpan={entries.length}
+                        className={`text-center align-middle font-semibold text-sm text-gray-800 px-3 py-1.5 !border-1 !border-gray-800 w-1/5`}
+                        style={{ backgroundColor: darkBg }}
+                      >
+                        {sectionLabels[section]}
+                      </td>
+                    )}
+                    <td 
+                      className={`px-3 py-1.5 font-bold text-sm text-gray-900 !border-1 !border-gray-800 w-1/4`}
+                      style={{ backgroundColor: lightBg }}
+                    >
+                      {formatKey(key)}
+                    </td>
+                    <td 
+                      className={`px-3 py-1.5 text-sm text-gray-800 !border-1 !border-gray-800 w-1/2`}
+                      style={{ backgroundColor: lightBg }}
+                    >
+                      {value}
+                    </td>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        ))}
+                );
+              });
+            })}
+          </tbody>
+        </table>
       </div>
     );
   };
