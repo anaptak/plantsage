@@ -52,7 +52,13 @@ function App() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-[url('/background_earth.png')] bg-no-repeat bg-center bg-cover text-center max-w-screen-xl mx-auto p-8">
+    <div 
+      className="flex items-center justify-center h-screen bg-no-repeat bg-cover text-center max-w-screen-xl mx-auto p-8"
+      style={{
+        backgroundImage: "url('/background_earth.png')",
+        backgroundPosition: "center 30%",
+        backgroundSize: "cover",
+      }}>
       <div className="flex flex-col items-center justify-center h-[30vh] text-center">
         <img 
           src={plantsageLogo} 
