@@ -32,6 +32,8 @@ def query_plant(plant: str):
     Return the result strictly in this JSON format:
 
     {{
+        "title": "",  // common name or scientific name of the plant
+        "description": "",  // 1-2 sentence description of the plant
         "environment": {{
             "light_intensity": "",
             "daylight_hours": "",
