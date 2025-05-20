@@ -8,21 +8,25 @@ function App() {
   const [plantName, setPlantName] = useState('');
   const [responseData, setResponseData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [plantTitle, setPlantTitle] = useState('');
+  const [plantDescription, setPlantDescription] = useState('');
 
   const handleSubmit = async () => {
     if (!plantName) return;
 
-    setIsLoading(true);
     try {
+      setIsLoading(true);
       const res = await fetch(`http://localhost:8000/query?plant=${encodeURIComponent(plantName)}`);
       const data = await res.json();
-      setResponseData(data); 
-      setTimeout(() => {
-        resultsRef.current?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
+
+      setPlantTitle(data.title || '');
+      setPlantDescription(data.description || '');
+      setResponseData(data); // full object includes environment, planting, care
     } catch (err) {
       console.error(err);
-      setResponseData({ error: "Could not fetch plant info." });
+      setPlantTitle('');
+      setPlantDescription('');
+      setResponseData({ error: "Sorry, we couldn't fetch plant info at this time." });
     } finally {
       setIsLoading(false);
     }
@@ -52,6 +56,12 @@ function App() {
 
     return (
       <div className="overflow-x-auto w-full px-4 py-12">
+        {plantTitle && (
+          <div className="mt-6 text-left max-w-3xl mx-auto">
+            <h2 className="text-2xl font-bold text-[#2c4539]">{plantTitle}</h2>
+            <p className="mt-1 text-gray-700">{plantDescription}</p>
+          </div>
+        )}
         <table className="w-[90%] max-w-4xl table-auto mx-auto border-separate border-spacing-0 !border-[2px] !border-gray-800 rounded-xl overflow-hidden shadow">
           <tbody>
             {sectionOrder.map((section) => {
@@ -107,7 +117,7 @@ function App() {
           backgroundImage: "url('/background_earth.png')",
           backgroundPosition: "center 30%",
           backgroundSize: "cover",
-          backgroundAttachment: "scroll", // or 'fixed' if you want it to stay pinned
+          backgroundAttachment: "scroll", 
         }}
       >
         <div className="flex items-center justify-center h-screen text-center max-w-screen-xl mx-auto p-8">
