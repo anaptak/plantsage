@@ -11,25 +11,33 @@ function App() {
   const [plantTitle, setPlantTitle] = useState('');
   const [plantDescription, setPlantDescription] = useState('');
   const [bgPositionY, setBgPositionY] = useState('');
-  
+  const resultsRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     const img = new Image();
     img.src = "/background_earth.png";
 
     img.onload = () => {
-      const grassY = 1400;
-      const percentFromTop = (grassY / img.naturalHeight) * 100;
-      const screenHeightPercent = (window.innerHeight / img.naturalHeight) * 100;
-      const offsetPercent = percentFromTop - screenHeightPercent;
-      setBgPositionY(`center ${offsetPercent}%`);
+      const imageHeight = img.naturalHeight;
+      const imageWidth = img.naturalWidth;
+      const grassHeight = 1500;
+
+      const viewportHeight = window.innerHeight;
+      const viewportWidth = window.innerWidth;
+
+      const scale = Math.max(viewportWidth / imageWidth, viewportHeight / imageHeight);
+      const scaledImageHeight = imageHeight * scale;
+      const scaledGrassHeight = grassHeight * scale;
+
+      const offsetY = scaledGrassHeight - viewportHeight;
+      const offsetPercent = (offsetY / scaledImageHeight) * 100;
+
+      const halfViewportHeight = viewportHeight / 2;
+      const newOffset = (halfViewportHeight/imageHeight) * 100;
+
+      setBgPositionY(`center ${49.5 - newOffset}%`);
     };
   }, []);
-
-  useEffect(() => {
-    if (responseData && resultsRef.current) {
-      resultsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }, [responseData]);
 
   const handleSubmit = async () => {
     if (!plantName) return;
@@ -41,7 +49,7 @@ function App() {
 
       setPlantTitle(data.title || '');
       setPlantDescription(data.description || '');
-      setResponseData(data); // full object includes environment, planting, care
+      setResponseData(data);
     } catch (err) {
       console.error(err);
       setPlantTitle('');
@@ -128,79 +136,86 @@ function App() {
     return key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
   };
 
-  const resultsRef = useRef<HTMLDivElement | null>(null);
   return (
     <>
-      <div
-        className="bg-no-repeat bg-cover"
-        style={{
-          backgroundImage: "url('/background_earth.png')",
-          backgroundPosition: bgPositionY, 
-          backgroundSize: "cover",
-          backgroundAttachment: "scroll", 
-        }}
-      >
-        <div className="flex items-center justify-center h-screen text-center max-w-screen-xl mx-auto p-8">
-          <div className="flex flex-col items-center justify-center h-[30vh] text-center">
-            <img 
-              src={plantsageLogo} 
-              alt="PlantSage Logo"
-              className="w-24 h-24 mb-4" 
-            />
-            <h1 className="text-[3rem] font-bold text-[#2c4539] mb-4 tracking-wide [text-shadow:1px_1px_2px_rgba(0,0,0,0.05)] font-['Playfair_Display']">
-              Plant Sage
-            </h1>
-            <Input
-              type="text"
-              value={plantName}
-              onChange={(e) => setPlantName(e.target.value)}
-              placeholder="Enter the Name of a Plant"
-              className="h-14 text-base px-4 py-3 rounded-2xl w-[260px] shadow-sm border border-[#18794e] bg-white"
-            />
-            <Button 
-              onClick={handleSubmit}
-              disabled={isLoading}
-              className={`mt-3 px-6 py-3 text-base text-white rounded-[10px] shadow ${isLoading ? "bg-[#2c4539]" : "bg-[#18794e] hover:bg-[#2c4539]"}`}
-            >
-              {isLoading ? (
-                <>
-                  <svg
-                    className="animate-spin mr-2 h-4 w-4 text-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    />
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 000 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z"
-                    />
-                  </svg>
-                  Loading...
-                </>
-              ) : (
-                "Get Info"
-              )}
-            </Button>
-          </div>
-        </div>
+      <div className="relative min-h-screen overflow-x-hidden">
+        {/* Background layer */}
+        <div
+          key={bgPositionY}
+          className="absolute inset-0 z-0 bg-no-repeat bg-cover"
+          style={{
+            backgroundImage: "url('/background_earth.png')",
+            backgroundPosition: bgPositionY,
+            backgroundSize: "cover",
+          }}
+        />
 
-        {responseData && !responseData.error && (
-          <div
-            ref={resultsRef}
-            className="flex flex-col items-center justify-center min-h-[120vh] text-center"
-          >
-            {renderTable()}
+        {/* Foreground content */}
+        <div className="relative z-10">
+          {/* Splash */}
+          <div className="flex items-center justify-center h-screen text-center max-w-screen-xl mx-auto p-8">
+            <div className="flex flex-col items-center justify-center h-[30vh] text-center">
+              <img 
+                src={plantsageLogo} 
+                alt="PlantSage Logo"
+                className="w-24 h-24 mb-4" 
+              />
+              <h1 className="text-[3rem] font-bold text-[#2c4539] mb-4 tracking-wide [text-shadow:1px_1px_2px_rgba(0,0,0,0.05)] font-['Playfair_Display']">
+                Plant Sage
+              </h1>
+              <Input
+                type="text"
+                value={plantName}
+                onChange={(e) => setPlantName(e.target.value)}
+                placeholder="Enter the Name of a Plant"
+                className="h-14 text-base px-4 py-3 rounded-2xl w-[260px] shadow-sm border border-[#18794e] bg-white"
+              />
+              <Button 
+                onClick={handleSubmit}
+                disabled={isLoading}
+                className={`mt-3 px-6 py-3 text-base text-white rounded-[10px] shadow ${isLoading ? "bg-[#2c4539]" : "bg-[#18794e] hover:bg-[#2c4539]"}`}
+              >
+                {isLoading ? (
+                  <>
+                    <svg
+                      className="animate-spin mr-2 h-4 w-4 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 000 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z"
+                      />
+                    </svg>
+                    Loading...
+                  </>
+                ) : (
+                  "Get Info"
+                )}
+              </Button>
+            </div>
           </div>
-        )}
+
+          {/* Results table */}
+          {responseData && !responseData.error && (
+            <div
+              ref={resultsRef}
+              className="flex flex-col items-center justify-center min-h-[120vh] text-center"
+            >
+              {renderTable()}
+            </div>
+          )}
+        </div>
       </div>
     </>
   );
