@@ -7,10 +7,12 @@ import './App.css';
 function App() {
   const [plantName, setPlantName] = useState('');
   const [responseData, setResponseData] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async () => {
     if (!plantName) return;
 
+    setIsLoading(true);
     try {
       const res = await fetch(`http://localhost:8000/query?plant=${encodeURIComponent(plantName)}`);
       const data = await res.json();
@@ -21,8 +23,10 @@ function App() {
     } catch (err) {
       console.error(err);
       setResponseData({ error: "Could not fetch plant info." });
+    } finally {
+      setIsLoading(false);
     }
-  }
+  };
 
   const renderTable = () => {
     if (!responseData || responseData.error) return null;
@@ -125,9 +129,36 @@ function App() {
             />
             <Button 
               onClick={handleSubmit}
-              className="mt-3 px-6 py-3 text-base bg-[#18794e] text-white rounded-[10px] shadow hover:bg-[#2c4539]"
+              disabled={isLoading}
+              className={`mt-3 px-6 py-3 text-base text-white rounded-[10px] shadow ${isLoading ? "bg-[#2c4539]" : "bg-[#18794e] hover:bg-[#2c4539]"}`}
             >
-              Get Info
+              {isLoading ? (
+                <>
+                  <svg
+                    className="animate-spin mr-2 h-4 w-4 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 000 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z"
+                    />
+                  </svg>
+                  Loading...
+                </>
+              ) : (
+                "Get Info"
+              )}
             </Button>
           </div>
         </div>
