@@ -57,9 +57,9 @@ function App() {
     return (
       <div className="overflow-x-auto w-full px-4 py-12">
         {plantTitle && (
-          <div className="mt-6 text-left max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-[#2c4539]">{plantTitle}</h2>
-            <p className="mt-1 text-gray-700">{plantDescription}</p>
+          <div className="mb-8 text-center max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold text-[#2c4539] font-['Playfair_Display']">{plantTitle}</h2>
+            <p className="mt-3 text-base text-gray-700 leading-relaxed">{plantDescription}</p>
           </div>
         )}
         <table className="w-[90%] max-w-4xl table-auto mx-auto border-separate border-spacing-0 !border-[2px] !border-gray-800 rounded-xl overflow-hidden shadow">
@@ -135,7 +135,7 @@ function App() {
               value={plantName}
               onChange={(e) => setPlantName(e.target.value)}
               placeholder="Enter the Name of a Plant"
-              className="h-14 text-base px-4 py-3 rounded-xl w-[260px] shadow-sm border border-[#18794e] bg-white"
+              className="h-14 text-base px-4 py-3 rounded-2xl w-[260px] shadow-sm border border-[#18794e] bg-white"
             />
             <Button 
               onClick={handleSubmit}
