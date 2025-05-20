@@ -10,6 +10,32 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [plantTitle, setPlantTitle] = useState('');
   const [plantDescription, setPlantDescription] = useState('');
+  const [bgPositionY, setBgPositionY] = useState("center 49.5%");
+  
+  useEffect(() => {
+    const img = new Image();
+    img.src = "/background_earth.png"; // Adjust if your path changes
+
+    img.onload = () => {
+      const imageHeight = img.naturalHeight; 
+      const imageWidth = img.naturalWidth;
+
+      const grassHeight = 1387;
+      const grassPercent = (grassHeight / imageHeight) * 100;
+
+      const viewportHeight = window.innerHeight;
+      const viewportWidth = window.innerWidth;
+
+      const scale = Math.max(viewportWidth / imageWidth, viewportHeight / imageHeight);
+      const scaledImageHeight = imageHeight * scale;
+      const scaledGrassHeight = grassHeight * scale;
+
+      const offsetY = scaledGrassHeight - viewportHeight;
+      const offsetPercent = (offsetY / scaledImageHeight) * 100;
+
+      setBgPositionY(`center ${grassPercent - offsetPercent}%`);
+    };
+  }, []);
 
   const handleSubmit = async () => {
     if (!plantName) return;
@@ -115,7 +141,7 @@ function App() {
         className="bg-no-repeat bg-cover"
         style={{
           backgroundImage: "url('/background_earth.png')",
-          backgroundPosition: "center 30%",
+          backgroundPosition: bgPositionY, 
           backgroundSize: "cover",
           backgroundAttachment: "scroll", 
         }}
