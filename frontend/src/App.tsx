@@ -164,7 +164,7 @@ function App() {
                       d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 000 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z"
                     />
                   </svg>
-                  Loading...
+                  Digging up Info...
                 </>
               ) : (
                 "Get Info"
