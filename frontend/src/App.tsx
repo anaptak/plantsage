@@ -54,7 +54,7 @@ function App() {
 
     img.onload = () => {
       const imageHeight = img.naturalHeight;
-      const desiredBottomY = 1400;
+      const desiredBottomY = 2200;
       const screenHeight = window.innerHeight;
       const initialOffsetPx = desiredBottomY - screenHeight;
 
@@ -183,7 +183,7 @@ function App() {
         ref={heroRef}
         className="relative h-screen"
       >
-        <div className="flex flex-col items-center justify-center h-full text-center">
+        <div className="flex flex-col items-center justify-center h-full text-center min-h-[80vh]">
           <img src={plantsageLogo} alt="PlantSage Logo" className="w-24 h-24 mb-4" />
           <h1 className="text-[3rem] font-bold text-[#2c4539] mb-4 tracking-wide [text-shadow:1px_1px_2px_rgba(0,0,0,0.05)] font-['Playfair_Display']">
             Plant Sage
