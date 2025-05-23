@@ -21,7 +21,7 @@ function App() {
 
       setPlantTitle(data.title || '');
       setPlantDescription(data.description || '');
-      setResponseData(data); // full object includes environment, planting, care
+      setResponseData(data); 
     } catch (err) {
       console.error(err);
       setPlantTitle('');
@@ -58,6 +58,7 @@ function App() {
       <div className="overflow-x-auto w-full px-4 py-12">
         {plantTitle && (
           <div className="mb-8 text-center max-w-3xl mx-auto">
+            <p className="mt-3 mb-7 text-base text-gray-700 leading-relaxed">Here's the dirt on</p>
             <h2 className="text-3xl font-bold text-[#2c4539] font-['Playfair_Display']">{plantTitle}</h2>
             <p className="mt-3 text-base text-gray-700 leading-relaxed">{plantDescription}</p>
           </div>
