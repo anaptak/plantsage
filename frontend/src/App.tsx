@@ -10,6 +10,58 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [plantTitle, setPlantTitle] = useState('');
   const [plantDescription, setPlantDescription] = useState('');
+  const [bgPositionY, setBgPositionY] = useState('');
+
+  const heroRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const resultsRef = useRef<HTMLDivElement | null>(null);
+
+  // Initial background offset (on mount)
+  useEffect(() => {
+    const img = new Image();
+    img.src = "/background_earth.png";
+
+    img.onload = () => {
+      const imageHeight = img.naturalHeight;
+      const desiredBottomY = 1400;
+      const screenHeight = window.innerHeight;
+      const initialOffsetPx = desiredBottomY - screenHeight;
+
+      const heroHeight = heroRef.current?.offsetHeight || 0;
+      const finalOffsetPx = initialOffsetPx;
+      const finalOffsetPercent = (finalOffsetPx / imageHeight) * 100;
+
+      console.log('%c=== INITIAL BG POSITION ===', 'color: orange; font-weight: bold;');
+      console.log('Offset Y (%)         :', finalOffsetPercent);
+      setBgPositionY(`center ${finalOffsetPercent}%`);
+    };
+  }, []);
+
+  // Updated background offset (after results load)
+  useEffect(() => {
+    if (!responseData || !containerRef.current) return;
+
+    const img = new Image();
+    img.src = "/background_earth.png";
+
+    img.onload = () => {
+      const imageHeight = img.naturalHeight;
+      const desiredBottomY = 2400;
+      const screenHeight = window.innerHeight;
+      const initialOffsetPx = desiredBottomY - screenHeight;
+
+      const oldHeight = heroRef.current?.offsetHeight || 0;
+      const newHeight = containerRef.current?.offsetHeight || oldHeight;
+
+      const deltaCenter = (newHeight - oldHeight) / 2;
+      const finalOffsetPx = initialOffsetPx + deltaCenter;
+      const finalOffsetPercent = (finalOffsetPx / imageHeight) * 100;
+
+      console.log('%c=== UPDATED BG POSITION ===', 'color: green; font-weight: bold;');
+      console.log('Offset Y (%)         :', finalOffsetPercent);
+      setBgPositionY(`center ${finalOffsetPercent}%`);
+    };
+  }, [responseData]);
 
   const handleSubmit = async () => {
     if (!plantName) return;
@@ -21,7 +73,7 @@ function App() {
 
       setPlantTitle(data.title || '');
       setPlantDescription(data.description || '');
-      setResponseData(data); 
+      setResponseData(data);
     } catch (err) {
       console.error(err);
       setPlantTitle('');
@@ -36,19 +88,19 @@ function App() {
     if (!responseData || responseData.error) return null;
 
     const sectionOrder = ["environment", "planting", "care"];
-    const sectionLabels: Record<string, string> = {
+    const sectionLabels = {
       environment: "Environment",
       planting: "Planting",
       care: "Care",
     };
 
-    const sectionDarkColors: Record<string, string> = {
+    const sectionDarkColors = {
       environment: "#8ed7d5",
       planting: "#b1d6a8",
       care: "#d7c3a8"
     };
 
-    const sectionLightColors: Record<string, string> = {
+    const sectionLightColors = {
       environment: "#e9f6f8",
       planting: "#e2eedd",
       care: "#efe8df"
@@ -58,7 +110,6 @@ function App() {
       <div className="overflow-x-auto w-full px-4 py-12">
         {plantTitle && (
           <div className="mb-8 text-center max-w-3xl mx-auto">
-            <p className="mt-3 mb-7 text-base text-gray-700 leading-relaxed">Here's the dirt on</p>
             <h2 className="text-3xl font-bold text-[#2c4539] font-['Playfair_Display']">{plantTitle}</h2>
             <p className="mt-3 text-base text-gray-700 leading-relaxed">{plantDescription}</p>
           </div>
@@ -77,22 +128,16 @@ function App() {
                     {isFirstRow && (
                       <td
                         rowSpan={entries.length}
-                        className={`text-center align-middle font-semibold text-sm text-gray-800 px-3 py-1.5 !border-1 !border-gray-800 w-1/5`}
+                        className="text-center align-middle font-semibold text-sm text-gray-800 px-3 py-1.5 !border-1 !border-gray-800 w-1/5"
                         style={{ backgroundColor: darkBg }}
                       >
                         {sectionLabels[section]}
                       </td>
                     )}
-                    <td 
-                      className={`px-3 py-1.5 font-bold text-sm text-gray-900 !border-1 !border-gray-800 w-1/4`}
-                      style={{ backgroundColor: lightBg }}
-                    >
+                    <td className="px-3 py-1.5 font-bold text-sm text-gray-900 !border-1 !border-gray-800 w-1/4" style={{ backgroundColor: lightBg }}>
                       {formatKey(key)}
                     </td>
-                    <td 
-                      className={`px-3 py-1.5 text-sm text-gray-800 !border-1 !border-gray-800 w-1/2`}
-                      style={{ backgroundColor: lightBg }}
-                    >
+                    <td className="px-3 py-1.5 text-sm text-gray-800 !border-1 !border-gray-800 w-1/2" style={{ backgroundColor: lightBg }}>
                       {value}
                     </td>
                   </tr>
@@ -105,85 +150,61 @@ function App() {
     );
   };
 
-  const formatKey = (key: string) => {
-    return key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-  };
+  const formatKey = (key: string) => key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 
-  const resultsRef = useRef<HTMLDivElement | null>(null);
   return (
-    <>
+    <div 
+      ref={containerRef}
+      style={{
+        backgroundImage: "url('/background_earth.png')",
+        backgroundPosition: bgPositionY,
+        backgroundSize: "cover",
+        backgroundAttachment: "scroll",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <div
-        className="bg-no-repeat bg-cover"
-        style={{
-          backgroundImage: "url('/background_earth.png')",
-          backgroundPosition: "center 30%",
-          backgroundSize: "cover",
-          backgroundAttachment: "scroll", 
-        }}
+        ref={heroRef}
+        className="relative h-screen"
       >
-        <div className="flex items-center justify-center h-screen text-center max-w-screen-xl mx-auto p-8">
-          <div className="flex flex-col items-center justify-center h-[30vh] text-center">
-            <img 
-              src={plantsageLogo} 
-              alt="PlantSage Logo"
-              className="w-24 h-24 mb-4" 
-            />
-            <h1 className="text-[3rem] font-bold text-[#2c4539] mb-4 tracking-wide [text-shadow:1px_1px_2px_rgba(0,0,0,0.05)] font-['Playfair_Display']">
-              Plant Sage
-            </h1>
-            <Input
-              type="text"
-              value={plantName}
-              onChange={(e) => setPlantName(e.target.value)}
-              placeholder="Enter the Name of a Plant"
-              className="h-14 text-base px-4 py-3 rounded-2xl w-[260px] shadow-sm border border-[#18794e] bg-white"
-            />
-            <Button 
-              onClick={handleSubmit}
-              disabled={isLoading}
-              className={`mt-3 px-6 py-3 text-base text-white rounded-[10px] shadow ${isLoading ? "bg-[#2c4539]" : "bg-[#18794e] hover:bg-[#2c4539]"}`}
-            >
-              {isLoading ? (
-                <>
-                  <svg
-                    className="animate-spin mr-2 h-4 w-4 text-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    />
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 000 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z"
-                    />
-                  </svg>
-                  Digging up Info...
-                </>
-              ) : (
-                "Get Info"
-              )}
-            </Button>
-          </div>
-        </div>
-
-        {responseData && !responseData.error && (
-          <div
-            ref={resultsRef}
-            className="flex flex-col items-center justify-center min-h-[120vh] text-center"
+        <div className="flex flex-col items-center justify-center h-full text-center">
+          <img src={plantsageLogo} alt="PlantSage Logo" className="w-24 h-24 mb-4" />
+          <h1 className="text-[3rem] font-bold text-[#2c4539] mb-4 tracking-wide [text-shadow:1px_1px_2px_rgba(0,0,0,0.05)] font-['Playfair_Display']">
+            Plant Sage
+          </h1>
+          <Input
+            type="text"
+            value={plantName}
+            onChange={(e) => setPlantName(e.target.value)}
+            placeholder="Enter the Name of a Plant"
+            className="h-14 text-base px-4 py-3 rounded-2xl w-[260px] shadow-sm border border-[#18794e] bg-white"
+          />
+          <Button
+            onClick={handleSubmit}
+            disabled={isLoading}
+            className={`mt-3 px-6 py-3 text-base text-white rounded-[10px] shadow ${isLoading ? "bg-[#2c4539]" : "bg-[#18794e] hover:bg-[#2c4539]"}`}
           >
-            {renderTable()}
-          </div>
-        )}
+            {isLoading ? (
+              <>
+                <svg className="animate-spin mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 000 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z" />
+                </svg>
+                Loading...
+              </>
+            ) : (
+              "Get Info"
+            )}
+          </Button>
+        </div>
       </div>
-    </>
+
+      {responseData && !responseData.error && (
+        <div ref={resultsRef} className="flex flex-col items-center justify-center min-h-[120vh] text-center">
+          {renderTable()}
+        </div>
+      )}
+    </div>
   );
 }
 
