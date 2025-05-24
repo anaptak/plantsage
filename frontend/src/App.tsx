@@ -110,6 +110,9 @@ function App() {
       <div className="overflow-x-auto w-full px-4 py-12">
         {plantTitle && (
           <div className="mb-8 text-center max-w-3xl mx-auto">
+            <h2 className="text-2xl font-semibold text-[#2c4539] mb-6 mt-12 font-['Playfair_Display']">
+              Here's the dirt on...
+            </h2>
             <h2 className="text-3xl font-bold text-[#2c4539] font-['Playfair_Display']">{plantTitle}</h2>
             <p className="mt-3 text-base text-gray-700 leading-relaxed">{plantDescription}</p>
           </div>
