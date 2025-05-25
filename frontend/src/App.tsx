@@ -180,7 +180,7 @@ function App() {
             value={plantName}
             onChange={(e) => setPlantName(e.target.value)}
             placeholder="Enter the Name of a Plant"
-            className="h-14 text-base px-4 py-3 rounded-2xl w-[260px] shadow-sm border border-[#18794e] bg-white"
+            className="h-14 text-center px-4 py-3 rounded-2xl w-[260px] shadow-sm border border-[#18794e] bg-white"
           />
           <Button
             onClick={handleSubmit}
