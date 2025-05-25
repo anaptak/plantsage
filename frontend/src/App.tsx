@@ -16,61 +16,43 @@ function App() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const resultsRef = useRef<HTMLDivElement | null>(null);
 
-  // Initial background offset (on mount)
   useEffect(() => {
     const img = new Image();
     img.src = "/background_earth.png";
-
     img.onload = () => {
       const imageHeight = img.naturalHeight;
       const desiredBottomY = 1400;
       const screenHeight = window.innerHeight;
       const initialOffsetPx = desiredBottomY - screenHeight;
-
-      const heroHeight = heroRef.current?.offsetHeight || 0;
-      const finalOffsetPx = initialOffsetPx;
-      const finalOffsetPercent = (finalOffsetPx / imageHeight) * 100;
-
-      console.log('%c=== INITIAL BG POSITION ===', 'color: orange; font-weight: bold;');
-      console.log('Offset Y (%)         :', finalOffsetPercent);
+      const finalOffsetPercent = (initialOffsetPx / imageHeight) * 100;
       setBgPositionY(`center ${finalOffsetPercent}%`);
     };
   }, []);
 
-  // Updated background offset (after results load)
   useEffect(() => {
     if (!responseData || !containerRef.current) return;
-
     const img = new Image();
     img.src = "/background_earth.png";
-
     img.onload = () => {
       const imageHeight = img.naturalHeight;
       const desiredBottomY = 2400;
       const screenHeight = window.innerHeight;
       const initialOffsetPx = desiredBottomY - screenHeight;
-
       const oldHeight = heroRef.current?.offsetHeight || 0;
       const newHeight = containerRef.current?.offsetHeight || oldHeight;
-
       const deltaCenter = (newHeight - oldHeight) / 2;
       const finalOffsetPx = initialOffsetPx + deltaCenter;
       const finalOffsetPercent = (finalOffsetPx / imageHeight) * 100;
-
-      console.log('%c=== UPDATED BG POSITION ===', 'color: green; font-weight: bold;');
-      console.log('Offset Y (%)         :', finalOffsetPercent);
       setBgPositionY(`center ${finalOffsetPercent}%`);
     };
   }, [responseData]);
 
   const handleSubmit = async () => {
     if (!plantName) return;
-
     try {
       setIsLoading(true);
       const res = await fetch(`http://localhost:8000/query?plant=${encodeURIComponent(plantName)}`);
       const data = await res.json();
-
       setPlantTitle(data.title || '');
       setPlantDescription(data.description || '');
       setResponseData(data);
@@ -156,7 +138,7 @@ function App() {
   const formatKey = (key: string) => key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 
   return (
-    <div 
+    <div
       ref={containerRef}
       style={{
         backgroundImage: "url('/background_earth.png')",
@@ -170,22 +152,27 @@ function App() {
         ref={heroRef}
         className="relative h-screen"
       >
-        <div className="flex flex-col items-center justify-center h-full text-center">
-          <img src={plantsageLogo} alt="PlantSage Logo" className="w-24 h-24 mb-4" />
-          <h1 className="text-[3rem] font-bold text-[#2c4539] mb-4 tracking-wide [text-shadow:1px_1px_2px_rgba(0,0,0,0.05)] font-['Playfair_Display']">
+        <div className="flex flex-col items-center justify-start h-full text-center pt-12 sm:pt-16">
+          <img src={plantsageLogo} alt="PlantSage Logo" className="w-28 h-28 mb-2" />
+          <h1 className="text-[3rem] font-bold text-[#2c4539] tracking-wide [text-shadow:1px_1px_2px_rgba(0,0,0,0.05)] font-['Playfair_Display'] mb-1">
             Plant Sage
           </h1>
+          <p className="text-[#2c4539] text-sm mb-6 italic font-medium">
+            Care advice rooted in simplicity.
+          </p>
           <Input
             type="text"
             value={plantName}
             onChange={(e) => setPlantName(e.target.value)}
-            placeholder="Enter the Name of a Plant"
-            className="h-14 text-center px-4 py-3 rounded-2xl w-[260px] shadow-sm border border-[#18794e] bg-white"
+            placeholder="e.g., Monstera, Aloe, Snake Plant"
+            className="h-14 text-center px-4 py-3 rounded-2xl w-[260px] shadow-sm border border-[#18794e] bg-gray-50 placeholder:text-gray-500"
           />
           <Button
             onClick={handleSubmit}
             disabled={isLoading}
-            className={`mt-3 px-6 py-3 text-base text-white rounded-[10px] shadow ${isLoading ? "bg-[#2c4539]" : "bg-[#18794e] hover:bg-[#2c4539]"}`}
+            className={`mt-3 px-6 py-3 text-base text-white rounded-[10px] shadow transition-all duration-200 transform ${
+              isLoading ? "bg-[#2c4539]" : "bg-[#18794e] hover:bg-[#2c4539] hover:scale-105"
+            }`}
           >
             {isLoading ? (
               <>
