@@ -35,22 +35,19 @@ def query_plant(plant: str):
         "title": "",  // common name or scientific name of the plant
         "description": "",  // 1-2 sentence description of the plant
         "environment": {{
-            "light_intensity": "",
-            "daylight_hours": "",
+            "light": "",
             "temperature": "",
-            "air_moisture": ""
+            "humidity": ""
         }},
         "planting": {{
-            "soil_type": "",
-            "soil_mixture": "",
-            "pH": "",
-            "root_system": ""
+            "soil_blend": "",   // provide ratios
+            "container": "",    // deep, wide, etc. based on root system
+            "pH": ""
         }},
         "care": {{
-            "watering_instructions": "",
-            "soil_moisture": "",
+            "watering": "", // frequency, amount
             "fertilization": "",
-            "grow_notes": ""
+            "care_notes": ""
         }}
     }}
     """
