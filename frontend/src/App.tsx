@@ -165,7 +165,7 @@ function App() {
             value={plantName}
             onChange={(e) => setPlantName(e.target.value)}
             placeholder="Enter your plant name..."
-            className="h-14 text-center px-4 py-3 rounded-2xl w-[260px] shadow-sm border border-[#18794e] bg-gray-50 placeholder:text-gray-500"
+            className="h-12 text-center px-4 py-3 rounded-2xl w-[260px] shadow-sm border border-[#18794e] bg-gray-50 placeholder:text-gray-500"
           />
           <Button
             onClick={handleSubmit}
