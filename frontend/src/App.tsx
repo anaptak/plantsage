@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Input } from "./components/ui/input";
 import { Button } from "./components/ui/button";
 import plantsageLogo from './assets/plantsage_logo.PNG';
+import backgroundEarth from './assets/background_earth.png';
 import './App.css';
 
 function App() {
@@ -141,7 +142,7 @@ function App() {
     <div
       ref={containerRef}
       style={{
-        backgroundImage: "url('/background_earth.png')",
+        backgroundImage: `url(${backgroundEarth})`,
         backgroundPosition: bgPositionY,
         backgroundSize: "cover",
         backgroundAttachment: "scroll",
