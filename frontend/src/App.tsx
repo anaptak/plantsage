@@ -126,7 +126,7 @@ function App() {
                       {formatKey(key)}
                     </td>
                     <td className="px-3 py-1.5 text-sm text-gray-800 !border-1 !border-gray-800 w-1/2" style={{ backgroundColor: lightBg }}>
-                      {value}
+                      {String(value)}
                     </td>
                   </tr>
                 );
