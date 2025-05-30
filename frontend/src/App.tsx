@@ -70,20 +70,22 @@ function App() {
   const renderTable = () => {
     if (!responseData || responseData.error) return null;
 
-    const sectionOrder = ["environment", "planting", "care"];
-    const sectionLabels = {
+    const sectionOrder = ["environment", "planting", "care"] as const;
+    type Section = typeof sectionOrder[number];
+
+    const sectionLabels: Record<Section, string> = {
       environment: "Environment",
       planting: "Planting",
       care: "Care",
     };
 
-    const sectionDarkColors = {
+    const sectionDarkColors: Record<Section, string> = {
       environment: "#8ed7d5",
       planting: "#b1d6a8",
       care: "#d7c3a8"
     };
 
-    const sectionLightColors = {
+    const sectionLightColors: Record<Section, string> = {
       environment: "#e9f6f8",
       planting: "#e2eedd",
       care: "#efe8df"
