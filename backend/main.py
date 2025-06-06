@@ -12,7 +12,11 @@ app = FastAPI()
 
 origins = [
     "http://localhost:3000",
-    "http://localhost:5173"
+    "http://localhost:5173",
+    "http://plantsage.ai",
+    "https://plantsage.ai",
+    "http://www.plantsage.ai",
+    "https://www.plantsage.ai"
 ]
 
 app.add_middleware(
