@@ -52,7 +52,7 @@ function App() {
     if (!plantName) return;
     try {
       setIsLoading(true);
-      const apiBase = import.meta.env.VITE_API_BASE || "";
+      const apiBase = import.meta.env.VITE_API_URL || "";
       const res = await fetch(`${apiBase}/query?plant=${encodeURIComponent(plantName)}`);
       const data = await res.json();
       setPlantTitle(data.title || '');
