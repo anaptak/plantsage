@@ -96,13 +96,13 @@ function App() {
       <div className="w-full px-4 py-12">
         {plantTitle && (
           <div className="mb-8 text-center max-w-3xl mx-auto">
-            <h2 className="text-lg font-semibold text-[#F5E8A8] mb-6 mt-12 shadow-md">
+            <h2 className="text-lg font-semibold text-[#F5E8A8] mb-6 mt-12">
               Here's the dirt on...
             </h2>
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#F5E8A8] font-['Playfair_Display'] shadow-md">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#F5E8A8] font-['Playfair_Display']">
               {plantTitle}
             </h2>
-            <p className="mt-3 text-sm sm:text-base text-[#F1F1F1] leading-relaxed shadow-md px-2">
+            <p className="mt-3 text-sm sm:text-base text-[#F1F1F1] leading-relaxed px-2">
               {plantDescription}
             </p>
           </div>
