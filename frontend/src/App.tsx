@@ -81,9 +81,9 @@ function App() {
     };
 
     const sectionDarkColors: Record<Section, string> = {
-      environment: "#8ed7d5",
-      planting: "#b1d6a8",
-      care: "#d7c3a8"
+      environment: "#339C99",
+      planting: "#5C8A4D",
+      care: "#A07851"
     };
 
     const sectionLightColors: Record<Section, string> = {
