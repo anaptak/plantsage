@@ -42,17 +42,19 @@ def query_plant(plant: str):
         "environment": {{
             "light": "",  // Ideal, tolerable, and poor lighting conditions
             "temperature": "",  // Optimal and tolerable temperature ranges, including seasonal needs
-            "humidity": ""  // Preferred humidity levels and how sensitive the plant is to deviations
+            "humidity": "",  // Preferred humidity levels and how sensitive the plant is to deviations
+            "native habitat": ""  // Brief description of the plant's natural environment, e.g., tropical, desert, etc.
         }},
         "planting": {{
-            "soil": "",  // Soil blend ratios for indoor growth or recommended soil types for outdoor; mention drainage needs
-            "containment": "",  // Recommendations based on root system: e.g., deep pot, wide pot, spacing for ground planting
+            "soil": "",  // Soil blend (with exact ratios in numbers) for indoor growth or recommended soil types for outdoor; mention drainage needs
+            "containment": "",  // Specify if plant is Indoor and/or Outdoor. Recommendations based on root system: e.g., deep pot, wide pot, spacing for ground planting
             "pH": ""  // Acceptable pH range and its importance for this plant
         }},
         "care": {{
             "watering": "",  // Frequency, method, and tips specific to this plant’s hydration needs
             "fertilization": "",  // Whether fertilization matters, suggested types (e.g., NPK ratios or organic), and frequency
-            "care_notes": ""  // Additional expert tips (e.g., pruning, pests, dormancy, seasonal advice)
+            "pruning": "",  // How and when to prune (if needed), including any specific techniques or tools
+            "care_notes": ""  // Additional expert tips that would help a user grow this plant successfully
         }}
     }}
     """
