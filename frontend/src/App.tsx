@@ -141,7 +141,7 @@ function App() {
           {sectionOrder.map((section) => (
             <div key={section} className="rounded-xl shadow-lg border border-gray-400 overflow-hidden">
               <h3
-                className="text-lg font-bold text-white px-6 py-3 text-center"
+                className="text-md font-bold text-white px-6 py-2 text-center"
                 style={{ backgroundColor: sectionDarkColors[section] }}
               >
                 {sectionLabels[section]}
