@@ -1,12 +1,11 @@
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 30px;
 }
 
 td {
   border: 1px solid #ccc;
-  padding: 8px;
+  padding: 6px;
 }
 
 td.key {
