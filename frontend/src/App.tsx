@@ -93,48 +93,90 @@ function App() {
     };
 
     return (
-      <div className="overflow-x-auto w-full px-4 py-12">
+      <div className="w-full px-4 py-12">
         {plantTitle && (
           <div className="mb-8 text-center max-w-3xl mx-auto">
-            <h2 className="text-l font-semibold text-[#F5E8A8] mb-6 mt-12 shadow-md">
+            <h2 className="text-lg font-semibold text-[#F5E8A8] mb-6 mt-12 shadow-md">
               Here's the dirt on...
             </h2>
-            <h2 className="text-3xl font-bold text-[#F5E8A8] font-['Playfair_Display'] shadow-md">{plantTitle}</h2>
-            <p className="mt-3 text-base text-[#F1F1F1] leading-relaxed shadow-md">{plantDescription}</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#F5E8A8] font-['Playfair_Display'] shadow-md">
+              {plantTitle}
+            </h2>
+            <p className="mt-3 text-sm sm:text-base text-[#F1F1F1] leading-relaxed shadow-md px-2">
+              {plantDescription}
+            </p>
           </div>
         )}
-        <table className="w-[90%] max-w-4xl table-auto mx-auto border-separate border-spacing-0 !border-[2px] !border-gray-800 rounded-xl overflow-hidden shadow">
-          <tbody>
-            {sectionOrder.map((section) => {
-              const entries = Object.entries(responseData[section]);
-              return entries.map(([key, value], idx) => {
-                const isFirstRow = idx === 0;
-                const darkBg = sectionDarkColors[section];
-                const lightBg = sectionLightColors[section];
 
-                return (
-                  <tr key={key}>
-                    {isFirstRow && (
-                      <td
-                        rowSpan={entries.length}
-                        className="text-center align-middle font-semibold text-sm text-gray-800 px-3 py-1.5 !border-1 !border-gray-800 w-1/5"
-                        style={{ backgroundColor: darkBg }}
-                      >
-                        {sectionLabels[section]}
-                      </td>
-                    )}
-                    <td className="px-3 py-1.5 font-bold text-sm text-gray-900 !border-1 !border-gray-800 w-1/4" style={{ backgroundColor: lightBg }}>
+        <div className="block lg:hidden space-y-4">
+          {sectionOrder.map((section) => (
+            <div key={section} className="bg-white rounded-xl shadow-lg border border-gray-300 overflow-hidden">
+              <h3
+                className="text-lg font-bold text-white px-6 py-4 text-center"
+                style={{ backgroundColor: sectionDarkColors[section] }}
+              >
+                {sectionLabels[section]}
+              </h3>
+              <div className="divide-y divide-gray-200">
+                {Object.entries(responseData[section]).map(([key, value]) => (
+                  <div 
+                    key={key} 
+                    className="px-6 py-4" 
+                    style={{ backgroundColor: sectionLightColors[section] }}
+                  >
+                    <div className="font-bold text-base text-gray-900 mb-2">
                       {formatKey(key)}
-                    </td>
-                    <td className="px-3 py-1.5 text-sm text-gray-800 !border-1 !border-gray-800 w-1/2" style={{ backgroundColor: lightBg }}>
+                    </div>
+                    <div className="text-base text-gray-800 leading-relaxed">
                       {String(value)}
-                    </td>
-                  </tr>
-                );
-              });
-            })}
-          </tbody>
-        </table>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="hidden lg:block overflow-x-auto">
+          <table className="w-[90%] max-w-4xl table-auto mx-auto border-separate border-spacing-0 border-2 border-gray-800 rounded-xl overflow-hidden shadow-lg">
+            <tbody>
+              {sectionOrder.map((section) => {
+                const entries = Object.entries(responseData[section]);
+                return entries.map(([key, value], idx) => {
+                  const isFirstRow = idx === 0;
+                  const darkBg = sectionDarkColors[section];
+                  const lightBg = sectionLightColors[section];
+
+                  return (
+                    <tr key={key}>
+                      {isFirstRow && (
+                        <td
+                          rowSpan={entries.length}
+                          className="text-center align-middle font-semibold text-sm text-gray-800 px-3 py-2 border border-gray-800 w-1/5"
+                          style={{ backgroundColor: darkBg }}
+                        >
+                          {sectionLabels[section]}
+                        </td>
+                      )}
+                      <td 
+                        className="px-3 py-2 font-bold text-sm text-gray-900 border border-gray-800 w-1/4" 
+                        style={{ backgroundColor: lightBg }}
+                      >
+                        {formatKey(key)}
+                      </td>
+                      <td 
+                        className="px-3 py-2 text-sm text-gray-800 border border-gray-800 w-1/2" 
+                        style={{ backgroundColor: lightBg }}
+                      >
+                        {String(value)}
+                      </td>
+                    </tr>
+                  );
+                });
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   };
