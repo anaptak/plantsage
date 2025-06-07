@@ -108,7 +108,7 @@ function App() {
           </div>
         )}
 
-        <div className="block lg:hidden space-y-4">
+        <div className="block sm:hidden space-y-4">
           {sectionOrder.map((section) => (
             <div key={section} className="bg-white rounded-xl shadow-lg border border-gray-300 overflow-hidden">
               <h3
@@ -137,7 +137,7 @@ function App() {
           ))}
         </div>
 
-        <div className="hidden lg:block space-y-8 px-6 max-w-5xl mx-auto">
+        <div className="hidden sm:block space-y-8 px-6 max-w-5xl mx-auto">
           {sectionOrder.map((section) => (
             <div key={section} className="rounded-xl shadow-lg border border-gray-400 overflow-hidden">
               <h3
