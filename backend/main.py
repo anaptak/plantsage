@@ -41,7 +41,7 @@ def query_plant(plant: str):
         "description": "",  // 1–2 sentence overview of the plant's characteristics or appeal
         "environment": {{
             "light": "",  // Ideal, tolerable, and poor lighting conditions
-            "temperature": "",  // Optimal and tolerable temperature ranges, including seasonal needs
+            "temperature": "",  // // Optimal and tolerable temperature ranges (including highest tolerable temperature), including seasonal needs
             "humidity": "",  // Preferred humidity levels and how sensitive the plant is to deviations
             "native habitat": ""  // Brief description of the plant's natural environment, e.g., tropical, desert, etc.
         }},
