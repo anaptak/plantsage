@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Input } from "./components/ui/input";
 import { Button } from "./components/ui/button";
 import plantsageLogo from './assets/plantsage_logo.PNG';
-import backgroundEarth from './assets/background_earth.png';
+import backgroundEarth from './assets/background_extended.png';
 import './App.css';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     const img = new Image();
-    img.src = "/background_earth.png";
+    img.src = "/background_extended.png";
     img.onload = () => {
       const imageHeight = img.naturalHeight;
       const desiredBottomY = 1400;
@@ -33,7 +33,7 @@ function App() {
   useEffect(() => {
     if (!responseData || !containerRef.current) return;
     const img = new Image();
-    img.src = "/background_earth.png";
+    img.src = "/background_extended.png";
     img.onload = () => {
       const imageHeight = img.naturalHeight;
       const desiredBottomY = 2400;
