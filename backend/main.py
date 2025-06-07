@@ -31,27 +31,28 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 @app.get("/query")
 def query_plant(plant: str):
+
     prompt = f"""
-    You are a helpful plant care assistant. Provide detailed care information about the plant: {plant}.
-    Return the result strictly in this JSON format:
+    You are a helpful plant care assistant. Provide detailed, expert-level guidance for growing this plant: {plant}.
+    Respond strictly in this JSON format:
 
     {{
-        "title": "",  // common name or scientific name of the plant
-        "description": "",  // 1-2 sentence description of the plant
+        "title": "",  // Common or scientific name of the plant
+        "description": "",  // 1–2 sentence overview of the plant's characteristics or appeal
         "environment": {{
-            "light": "",
-            "temperature": "",
-            "humidity": ""
+            "light": "",  // Ideal, tolerable, and poor lighting conditions
+            "temperature": "",  // Optimal and tolerable temperature ranges, including seasonal needs
+            "humidity": ""  // Preferred humidity levels and how sensitive the plant is to deviations
         }},
         "planting": {{
-            "soil_blend": "",   // provide ratios
-            "container": "",    // deep, wide, etc. based on root system
-            "pH": ""
+            "soil": "",  // Soil blend ratios for indoor growth or recommended soil types for outdoor; mention drainage needs
+            "containment": "",  // Recommendations based on root system: e.g., deep pot, wide pot, spacing for ground planting
+            "pH": ""  // Acceptable pH range and its importance for this plant
         }},
         "care": {{
-            "watering": "", // frequency, amount
-            "fertilization": "",
-            "care_notes": ""
+            "watering": "",  // Frequency, method, and tips specific to this plant’s hydration needs
+            "fertilization": "",  // Whether fertilization matters, suggested types (e.g., NPK ratios or organic), and frequency
+            "care_notes": ""  // Additional expert tips (e.g., pruning, pests, dormancy, seasonal advice)
         }}
     }}
     """
