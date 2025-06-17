@@ -1,8 +1,9 @@
 import re
 import os
 import json
-from openai import OpenAI
+from openai import AsyncOpenAI
 from fastapi import FastAPI
+from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
@@ -27,10 +28,10 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 @app.get("/query")
-def query_plant(plant: str):
+async def query_plant(plant: str):
 
     prompt = f"""
     You are a helpful plant care assistant. Provide detailed, expert-level guidance for growing this plant: {plant}.
@@ -59,15 +60,19 @@ def query_plant(plant: str):
     }}
     """
 
-    try:
-        response = client.chat.completions.create(
-            model="gpt-4o",
-            temperature=0.2,
-            messages=[{"role": "user", "content": prompt}]
-        )
-        raw_content = response.choices[0].message.content
-        cleaned = re.sub(r"^```(?:json)?|```$", "", raw_content.strip(), flags=re.MULTILINE).strip()
-        structured_info = json.loads(cleaned)
-        return structured_info
-    except Exception as e:
-        return {"error": str(e)}
+    async def generate():
+        try:
+            stream = await client.chat.completions.create(
+                model="gpt-4o",
+                temperature=0.2,
+                messages=[{"role": "user", "content": prompt}],
+                stream=True,
+            )
+            async for chunk in stream:
+                content = chunk.choices[0].delta.content
+                if content:
+                    yield content
+        except Exception as e:
+            yield json.dumps({"error": str(e)})
+
+    return StreamingResponse(generate(), media_type="text/plain")

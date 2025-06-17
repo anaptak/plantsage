@@ -18,9 +18,21 @@ function App() {
     if (!plantName) return;
     try {
       setIsLoading(true);
+      setPlantDescription('');
       const apiBase = import.meta.env.VITE_API_URL || "";
       const res = await fetch(`${apiBase}/query?plant=${encodeURIComponent(plantName)}`);
-      const data = await res.json();
+      if (!res.body) throw new Error('No response body');
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let jsonStr = '';
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const chunk = decoder.decode(value, { stream: true });
+        jsonStr += chunk;
+        setPlantDescription((prev) => prev + chunk);
+      }
+      const data = JSON.parse(jsonStr);
       setPlantTitle(data.title || '');
       setPlantDescription(data.description || '');
       setResponseData(data);
