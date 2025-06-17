@@ -1,6 +1,8 @@
 import re
 import os
 import json
+import time
+import sqlite3
 from openai import OpenAI
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -9,6 +11,21 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = FastAPI()
+
+# In-memory cache and persistent SQLite store
+CACHE_TTL = 3600  # seconds
+cache: dict[str, dict] = {}
+
+def init_db() -> None:
+    conn = sqlite3.connect("db.sqlite3")
+    c = conn.cursor()
+    c.execute(
+        "CREATE TABLE IF NOT EXISTS plant_cache (plant TEXT PRIMARY KEY, data TEXT, timestamp INTEGER)"
+    )
+    conn.commit()
+    conn.close()
+
+init_db()
 
 origins = [
     "http://localhost:3000",
@@ -31,6 +48,25 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 @app.get("/query")
 def query_plant(plant: str):
+    key = plant.lower().strip()
+    now = int(time.time())
+
+    # Check in-memory cache
+    entry = cache.get(key)
+    if entry and now - entry["timestamp"] < CACHE_TTL:
+        return entry["data"]
+
+    # Check persistent cache
+    conn = sqlite3.connect("db.sqlite3")
+    c = conn.cursor()
+    c.execute("SELECT data, timestamp FROM plant_cache WHERE plant=?", (key,))
+    row = c.fetchone()
+    if row and now - row[1] < CACHE_TTL:
+        data = json.loads(row[0])
+        cache[key] = {"data": data, "timestamp": row[1]}
+        conn.close()
+        return data
+    conn.close()
 
     prompt = f"""
     You are a helpful plant care assistant. Provide detailed, expert-level guidance for growing this plant: {plant}.
@@ -68,6 +104,16 @@ def query_plant(plant: str):
         raw_content = response.choices[0].message.content
         cleaned = re.sub(r"^```(?:json)?|```$", "", raw_content.strip(), flags=re.MULTILINE).strip()
         structured_info = json.loads(cleaned)
+
+        cache[key] = {"data": structured_info, "timestamp": now}
+        conn = sqlite3.connect("db.sqlite3")
+        c = conn.cursor()
+        c.execute(
+            "REPLACE INTO plant_cache(plant, data, timestamp) VALUES (?, ?, ?)",
+            (key, json.dumps(structured_info), now),
+        )
+        conn.commit()
+        conn.close()
         return structured_info
     except Exception as e:
         return {"error": str(e)}
