@@ -32,6 +32,7 @@ function App() {
       setResponseData({ error: "Sorry, we couldn't fetch plant info at this time." });
     } finally {
       setIsLoading(false);
+      setPlantName('');
     }
   };
 
