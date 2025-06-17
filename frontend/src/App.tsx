@@ -32,7 +32,6 @@ function App() {
       setResponseData({ error: "Sorry, we couldn't fetch plant info at this time." });
     } finally {
       setIsLoading(false);
-      setPlantName('');
     }
   };
 
@@ -61,7 +60,7 @@ function App() {
     };
 
     return (
-      <div className="w-full px-4 py-12">
+      <div className="w-full px-4 py-1">
         {plantTitle && (
           <div className="mb-8 text-center max-w-3xl mx-auto">
             <h2 className="text-lg font-semibold text-[#F5E8A8] mb-6 mt-12">
