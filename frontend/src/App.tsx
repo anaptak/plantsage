@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import { Input } from "./components/ui/input";
 import { Button } from "./components/ui/button";
+import { Info } from "lucide-react";
 import plantsageLogo from './assets/plantsage_logo.PNG';
 import skyGrass from './assets/sky_grass.jpg';
 import grassDirt from './assets/grass_dirt.jpg';
+import About from './About';
 import './App.css';
 
 function App() {
+  if (window.location.pathname == "/about") {
+    return <About />;
+  }
   const [plantName, setPlantName] = useState('');
   const [responseData, setResponseData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -152,7 +157,17 @@ function App() {
         backgroundRepeat: "no-repeat",
         minHeight: "100dvh",
       }}
+      className="relative"
     >
+      <a
+        href="/about"
+        aria-label="About Plant Sage"
+        className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-[#18794e] hover:text-[#14532d] rounded-full bg-white/70 hover:bg-white shadow backdrop-blur-sm transition-all duration-300
+          sm:gap-2 sm:px-4 sm:py-2"
+      >
+        <Info size={16} strokeWidth={2} />
+        <span className="hidden sm:inline">About Plant Sage</span>
+      </a>
       <div className="flex flex-col items-center justify-start text-center pt-12 sm:pt-16">
         {!submitted && (
           <>
