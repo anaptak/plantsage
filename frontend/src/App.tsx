@@ -25,6 +25,7 @@ function App() {
       setPlantDescription(data.description || '');
       setResponseData(data);
       setSubmitted(true);
+      window.scrollTo({"top": 0, behavior: 'smooth' });
     } catch (err) {
       console.error(err);
       setPlantTitle('');
