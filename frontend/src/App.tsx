@@ -162,38 +162,66 @@ function App() {
             <p className="text-[#2c4539] text-sm mb-8 italic font-medium">
               Plant Smarter, Not Harder
             </p>
+            <Input
+              type="text"
+              value={plantName}
+              onChange={(e) => setPlantName(e.target.value)}
+              placeholder="Enter your plant name..."
+              className="h-12 text-center px-4 py-3 rounded-2xl w-[260px] shadow-sm border border-[#18794e] bg-gray-50 placeholder:text-gray-500"
+            />
+            <Button
+              onClick={handleSubmit}
+              disabled={isLoading}
+              className={`mt-3 px-6 py-5 text-base text-white rounded-[10px] shadow transition-all duration-200 transform ${
+                isLoading ? "bg-[#2c4539]" : "bg-[#18794e] hover:bg-[#2c4539] hover:scale-105"
+              }`}
+            >
+              {isLoading ? (
+                <>
+                  <svg className="animate-spin mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 000 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z" />
+                  </svg>
+                  Getting Plant Info...
+                </>
+              ) : (
+                "Get Care Tips"
+              )}
+            </Button>
           </>
         )}
-        <Input
-          type="text"
-          value={plantName}
-          onChange={(e) => setPlantName(e.target.value)}
-          placeholder="Enter your plant name..."
-          className="h-12 text-center px-4 py-3 rounded-2xl w-[260px] shadow-sm border border-[#18794e] bg-gray-50 placeholder:text-gray-500"
-        />
-        <Button
-          onClick={handleSubmit}
-          disabled={isLoading}
-          className={`mt-3 px-6 py-5 text-base text-white rounded-[10px] shadow transition-all duration-200 transform ${
-            isLoading ? "bg-[#2c4539]" : "bg-[#18794e] hover:bg-[#2c4539] hover:scale-105"
-          }`}
-        >
-          {isLoading ? (
-            <>
-              <svg className="animate-spin mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 000 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z" />
-              </svg>
-              Getting Plant Info...
-            </>
-          ) : (
-            "Get Care Tips"
-          )}
-        </Button>
       </div>
       {responseData && !responseData.error && (
         <div className="flex flex-col items-center justify-center text-center py-12">
           {renderTable()}
+          <div className="mt-6 flex flex-col items-center">
+            <Input
+              type="text"
+              value={plantName}
+              onChange={(e) => setPlantName(e.target.value)}
+              placeholder="Enter your plant name..."
+              className="h-12 text-center px-4 py-3 rounded-2xl w-[260px] shadow-sm border border-[#18794e] bg-gray-50 placeholder:text-gray-500"
+            />
+            <Button
+              onClick={handleSubmit}
+              disabled={isLoading}
+              className={`mt-3 px-6 py-5 text-base text-white rounded-[10px] shadow transition-all duration-200 transform ${
+                isLoading ? "bg-[#2c4539]" : "bg-[#18794e] hover:bg-[#2c4539] hover:scale-105"
+              }`}
+            >
+              {isLoading ? (
+                <>
+                  <svg className="animate-spin mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 000 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z" />
+                  </svg>
+                  Getting Plant Info...
+                </>
+              ) : (
+                "Get Care Tips"
+              )}
+            </Button>
+          </div>
         </div>
       )}
     </div>
