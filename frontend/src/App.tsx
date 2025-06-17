@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Input } from "./components/ui/input";
 import { Button } from "./components/ui/button";
 import plantsageLogo from './assets/plantsage_logo.PNG';
-import skyGrass from './assets/sky_grass.JPG';
-import grassDirt from './assets/grass_dirt.JPG';
+import skyGrass from './assets/sky_grass.jpg';
+import grassDirt from './assets/grass_dirt.jpg';
 import './App.css';
 
 function App() {
