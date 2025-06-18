@@ -46,6 +46,22 @@ app.add_middleware(
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+def is_fictional_plant(name: str) -> bool:
+    question = (
+        f"Is '{name}' a fictional or made-up plant? Answer strictly yes or no."
+    )
+    try:
+        resp = client.chat.completions.create(
+            model="gpt-4o",
+            temperature=0,
+            messages=[{"role": "user", "content": question}],
+        )
+        answer = resp.choices[0].message.content.strip().lower()
+        return answer.startswith("yes")
+    except Exception:
+        return False
+
+
 @app.get("/query")
 def query_plant(plant: str):
     key = plant.lower().strip()
@@ -67,6 +83,8 @@ def query_plant(plant: str):
         conn.close()
         return data
     conn.close()
+
+    fictional = is_fictional_plant(plant)
 
     prompt = f"""
     You are a helpful plant care assistant. Provide detailed, expert-level guidance for growing this plant: {plant}.
@@ -98,7 +116,7 @@ def query_plant(plant: str):
     try:
         response = client.chat.completions.create(
             model="gpt-4o",
-            temperature=0.2,
+            temperature=0.9 if fictional else 0.2,
             messages=[{"role": "user", "content": prompt}]
         )
         raw_content = response.choices[0].message.content

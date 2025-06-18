@@ -176,7 +176,7 @@ function App() {
         {!submitted && (
           <>
             <img src={plantsageLogo} alt="PlantSage Logo" className="w-28 h-28 mb-2" />
-            <h1 className="text-[3rem] font-bold text-[#2c4539] tracking-wide [text-shadow:1px_1px_2px_rgba(0,0,0,0.05)] font-['Playfair_Display'] mb-5">
+            <h1 className="text-[3rem] font-bold text-[#2c4539] tracking-wide [text-shadow:1px_1px_2px_rgba(0,0,0,0.05)] font-['Playfair_Display'] mb-3">
               Plant Sage
             </h1>
             <p className="text-[#2c4539] text-sm mb-8 italic font-medium">
