@@ -66,10 +66,10 @@ function App() {
     };
 
     return (
-      <div className="w-full px-4 py-1">
+      <div id="print-area" className="w-full px-4 py-1">
         {plantTitle && (
           <div className="mb-8 text-center max-w-3xl mx-auto">
-            <h2 className="text-lg text-[#F5E8A8] mb-6 mt-12">
+            <h2 className="text-lg text-[#F5E8A8] mb-6 mt-12 no-print">
               Here's the dirt on...
             </h2>
             <h2 className="text-2xl sm:text-3xl font-bold text-[#F5E8A8] font-['Playfair_Display']">
@@ -162,13 +162,13 @@ function App() {
       <a
         href="/about"
         aria-label="About Plant Sage"
-        className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-[#18794e] hover:text-[#14532d] rounded-full bg-white/70 hover:bg-white shadow backdrop-blur-sm transition-all duration-300
+        className="no-print absolute top-4 right-4 flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-[#18794e] hover:text-[#14532d] rounded-full bg-white/70 hover:bg-white shadow backdrop-blur-sm transition-all duration-300
           sm:gap-2 sm:px-4 sm:py-2"
       >
         <Info size={16} strokeWidth={2} />
         <span className="hidden sm:inline">About Plant Sage</span>
       </a>
-      <div className="flex flex-col items-center justify-start text-center pt-12 sm:pt-16">
+      <div className="no-print flex flex-col items-center justify-start text-center pt-12 sm:pt-16">
         {!submitted && (
           <>
             <img src={plantsageLogo} alt="PlantSage Logo" className="w-28 h-28 mb-2" />
@@ -210,7 +210,14 @@ function App() {
       {responseData && !responseData.error && (
         <div className="flex flex-col items-center justify-center text-center py-12">
           {renderTable()}
-          <div className="mt-6 flex flex-col items-center">
+
+          <Button
+            onClick={() => window.print()}
+            className="no-print mt-6 px-6 py-3 mb-8 rounded-full text-sm sm:text-base font-medium text-white bg-gradient-to-r from-[#5C8A4D] to-[#339C99] hover:from-[#2c4539] hover:to-[#18794e] shadow-lg transition-transform duration-300 transform hover:scale-105"
+          >
+            🖨️ Print These Tips
+          </Button>
+          <div className="no-print mt-6 flex flex-col items-center">
             <Input
               type="text"
               value={plantName}
