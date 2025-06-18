@@ -69,7 +69,7 @@ function App() {
       <div id="print-area" className="w-full px-4 py-1">
         {plantTitle && (
           <div className="mb-8 text-center max-w-3xl mx-auto">
-            <h2 className="text-lg text-[#F5E8A8] mb-6 mt-12">
+            <h2 className="text-lg text-[#F5E8A8] mb-6 mt-12 no-print">
               Here's the dirt on...
             </h2>
             <h2 className="text-2xl sm:text-3xl font-bold text-[#F5E8A8] font-['Playfair_Display']">
