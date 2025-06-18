@@ -28,6 +28,7 @@ function About() {
             <li>🌞 Light, temperature, and humidity needs</li>
             <li>🌱 Soil type, container info, and pH preferences</li>
             <li>💧 Watering, fertilizing, pruning advice, and more</li>
+            <li>🖨️ Print-friendly care tables</li>
           </ul>
           <p className="mt-8">
             Results are generated live using OpenAI, then formatted for readability with a clean, mobile-friendly UI built from scratch.
@@ -51,7 +52,6 @@ function About() {
             <h2 className="text-2xl font-semibold text-green-700 mb-4">What’s Next</h2>
             <p>Here are some new features I'm planning next:</p>
             <ul className="list-disc list-inside space-y-2 mt-4">
-                <li>🖨️ Option to export or print care instructions</li>
                 <li>🌿 Personal garden to save and organize your plants</li>
                 <li>📍 Define rooms/locations with survivability insights</li>
                 <li>📊 Sortable table with abbreviated care info (e.g. light, water, temp)</li>

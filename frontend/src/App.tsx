@@ -66,7 +66,7 @@ function App() {
     };
 
     return (
-      <div className="w-full px-4 py-1">
+      <div id="print-area" className="w-full px-4 py-1">
         {plantTitle && (
           <div className="mb-8 text-center max-w-3xl mx-auto">
             <h2 className="text-lg text-[#F5E8A8] mb-6 mt-12">
@@ -162,13 +162,13 @@ function App() {
       <a
         href="/about"
         aria-label="About Plant Sage"
-        className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-[#18794e] hover:text-[#14532d] rounded-full bg-white/70 hover:bg-white shadow backdrop-blur-sm transition-all duration-300
+        className="no-print absolute top-4 right-4 flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-[#18794e] hover:text-[#14532d] rounded-full bg-white/70 hover:bg-white shadow backdrop-blur-sm transition-all duration-300
           sm:gap-2 sm:px-4 sm:py-2"
       >
         <Info size={16} strokeWidth={2} />
         <span className="hidden sm:inline">About Plant Sage</span>
       </a>
-      <div className="flex flex-col items-center justify-start text-center pt-12 sm:pt-16">
+      <div className="no-print flex flex-col items-center justify-start text-center pt-12 sm:pt-16">
         {!submitted && (
           <>
             <img src={plantsageLogo} alt="PlantSage Logo" className="w-28 h-28 mb-2" />
@@ -210,7 +210,13 @@ function App() {
       {responseData && !responseData.error && (
         <div className="flex flex-col items-center justify-center text-center py-12">
           {renderTable()}
-          <div className="mt-6 flex flex-col items-center">
+          <Button
+            onClick={() => window.print()}
+            className="no-print mt-4 px-6 py-3 text-base text-white rounded-[10px] shadow bg-[#5C8A4D] hover:bg-[#2c4539] hover:scale-105"
+          >
+            Print Results
+          </Button>
+          <div className="no-print mt-6 flex flex-col items-center">
             <Input
               type="text"
               value={plantName}
