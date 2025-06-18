@@ -153,6 +153,10 @@ body {
 @media print {
   body {
     background: #fff !important;
+    color: #000 !important;
+  }
+  * {
+    color: #000 !important;
   }
   .no-print {
     display: none !important;

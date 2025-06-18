@@ -75,7 +75,7 @@ function App() {
             <h2 className="text-2xl sm:text-3xl font-bold text-[#F5E8A8] font-['Playfair_Display']">
               {plantTitle}
             </h2>
-            <p className="mt-3 text-sm sm:text-base text-[#F1F1F1] leading-relaxed px-2">
+            <p className="mt-3 text-sm sm:text-base text-left text-[#F1F1F1] leading-relaxed px-2">
               {plantDescription}
             </p>
           </div>
@@ -100,7 +100,7 @@ function App() {
                     <div className="font-bold text-base text-gray-900 mb-2">
                       {formatKey(key)}
                     </div>
-                    <div className="text-base text-gray-800 leading-relaxed">
+                    <div className="text-base text-left text-gray-800 leading-relaxed">
                       {String(value)}
                     </div>
                   </div>
@@ -124,7 +124,7 @@ function App() {
                   {Object.entries(responseData[section]).map(([key, value]) => (
                     <tr key={key} className="border-t border-gray-300">
                       <td
-                        className="px-4 py-3 font-bold text-center text-sm text-gray-900 w-1/3"
+                        className="px-4 py-3 font-bold text-center text-sm text-gray-900 w-1/4"
                         style={{ backgroundColor: sectionLightColors[section] }}
                       >
                         {formatKey(key)}
