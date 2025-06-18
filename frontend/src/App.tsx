@@ -168,7 +168,11 @@ function App() {
         <Info size={16} strokeWidth={2} />
         <span className="hidden sm:inline">About Plant Sage</span>
       </a>
-      <div className="no-print flex flex-col items-center justify-start text-center pt-12 sm:pt-16">
+      <div
+        className={`no-print flex flex-col items-center text-center ${
+          submitted ? "justify-start pt-12 sm:pt-16" : "justify-center min-h-[100dvh]"
+        }`}
+      >
         {!submitted && (
           <>
             <img src={plantsageLogo} alt="PlantSage Logo" className="w-28 h-28 mb-2" />
