@@ -210,11 +210,12 @@ function App() {
       {responseData && !responseData.error && (
         <div className="flex flex-col items-center justify-center text-center py-12">
           {renderTable()}
+
           <Button
             onClick={() => window.print()}
-            className="no-print mt-4 px-6 py-3 text-base text-white rounded-[10px] shadow bg-[#5C8A4D] hover:bg-[#2c4539] hover:scale-105"
+            className="no-print mt-6 px-6 py-3 mb-8 rounded-full text-sm sm:text-base font-medium text-white bg-gradient-to-r from-[#5C8A4D] to-[#339C99] hover:from-[#2c4539] hover:to-[#18794e] shadow-lg transition-transform duration-300 transform hover:scale-105"
           >
-            Print Results
+            🖨️ Print These Tips
           </Button>
           <div className="no-print mt-6 flex flex-col items-center">
             <Input
