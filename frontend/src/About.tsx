@@ -4,6 +4,7 @@ import skyGrass from './assets/sky_grass.jpg';
 function About() {
   return (
     <div
+      className="pt-8"
       style={{
         backgroundImage: `url(${skyGrass})`,
         backgroundSize: "cover",
@@ -13,7 +14,7 @@ function About() {
         minHeight: "100dvh",
       }}
     >
-      <div className="bg-white/80 p-10 md:p-16 max-w-3xl mx-auto mt-10 rounded-2xl shadow-lg backdrop-blur-sm">
+      <div className="bg-white/80 p-10 md:p-16 max-w-3xl mx-auto rounded-2xl shadow-lg backdrop-blur-sm">
         <img src={plantsageLogo} alt="PlantSage Logo" className="w-28 h-28 mb-2" />
         <h1 className="text-4xl font-bold text-green-800 mb-6 text-center"> About Plant Sage</h1>
         <p className="text-lg leading-relaxed mb-12 text-gray-800">
