@@ -5,6 +5,7 @@ import { Info } from "lucide-react";
 import plantsageLogo from './assets/plantsage_logo.PNG';
 import skyGrass from './assets/sky_grass.jpg';
 import grassDirt from './assets/grass_dirt.jpg';
+import GoogleLogin from './components/GoogleLogin';
 import About from './About';
 import './App.css';
 
@@ -159,6 +160,9 @@ function App() {
       }}
       className="relative"
     >
+      <div className="no-print absolute top-4 left-4">
+        <GoogleLogin />
+      </div>
       <a
         href="/about"
         aria-label="About Plant Sage"
