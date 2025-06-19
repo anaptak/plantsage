@@ -15,15 +15,15 @@ function About() {
       }}
     >
       <div className="bg-white/80 p-10 md:p-16 max-w-3xl mx-auto rounded-2xl shadow-lg backdrop-blur-sm">
-        <img src={plantsageLogo} alt="PlantSage Logo" className="w-28 h-28 mb-2" />
-        <h1 className="text-4xl font-bold text-green-800 mb-6 text-center"> About Plant Sage</h1>
+        <div className="flex items-center justify-center gap-4 mb-6">
+          <img src={plantsageLogo} alt="PlantSage Logo" className="w-14 h-14" />
+          <h1 className="text-3xl md:text-4xl font-bold text-green-800">About Plant Sage</h1>
+        </div>
         <p className="text-lg leading-relaxed mb-12 text-gray-800">
-          Plant Sage was created to give simple, smart, and tailored guidance for plant care. Whether you're just starting your garden or you're a seasoned green thumb, Plant Sage provides AI-powered guidance that’s clear, fast, and fluff-free.
-        </p>
-
+          Plant Sage was created to give comprehensive plant care guidance without the need to sift through blog posts, ads, and personal anecdotes. It’s a straightforward tool that provides clear, structured care tips for your plants based on their names.        </p>
         <section className="mb-10">
           <h2 className="text-2xl font-semibold text-green-700 mb-4">What PlantSage Does</h2>
-          <p className="mb-2">Just type in a plant name and get personalized tips on:</p>
+          <p className="mb-2">Just type in a plant name and get tips on:</p>
           <ul className="list-disc list-inside space-y-2">
             <li>🌞 Light, temperature, and humidity needs</li>
             <li>🌱 Soil type, container info, and pH preferences</li>
@@ -31,7 +31,7 @@ function About() {
             <li>🖨️ Print-friendly care tables</li>
           </ul>
           <p className="mt-8">
-            Results are generated live using OpenAI, then formatted for readability with a clean, mobile-friendly UI built from scratch.
+            Results are generated live using GPT-4o then formatted for readability with a clean, mobile-friendly UI built from scratch.
           </p>
           <p className="mt-4">
             Plant Sage remembers past results for plants, so if someone has searched for yours before, your results will come quickly! Otherwise, it might take a few seconds to generate the first time.
@@ -41,10 +41,10 @@ function About() {
         <section className="mb-10">
           <h2 className="text-2xl font-semibold text-green-700 mb-4">Why I Built It</h2>
           <p>
-            After too many rabbit holes of blog posts, pop-ups, and personal anecdotes just to figure out how to water a plant, I figured there must be a better way. I wanted something clean and simple with no fluff, no ads, just clear plant care advice.
-            </p>
-            <p className="mt-4">
-            So I built a small tool: a single OpenAI query that returned structured guidance based on the plant's name. What started as a quick hack has turned into an ongoing project to make plant care easier, clearer, and more fun for myself.
+            I used to spend way too much time Googling plant care questions, wading through what seemed like endless blog posts that often didn't have the info I needed. As chatbots became more accurate, they were a convenient way to get plant care questions answered directly. But still, the responses were overly verbose, and repeatedly typing out the same set of questions became tedious.
+          </p>
+          <p className="mt-4">
+            So I built a small tool: a single GPT-4o query that returned structured guidance based on the plant's name. It was a simple idea, but worked well and I've had fun continuing to add features to it since then. I wanted to share it with others who might find it useful, too.
           </p>
         </section>
 
@@ -52,27 +52,11 @@ function About() {
             <h2 className="text-2xl font-semibold text-green-700 mb-4">What’s Next</h2>
             <p>Here are some new features I'm planning next:</p>
             <ul className="list-disc list-inside space-y-2 mt-4">
+                <li>📷 Plant identification tool</li>
                 <li>🌿 Personal garden to save and organize your plants</li>
                 <li>📍 Define rooms/locations with survivability insights</li>
                 <li>📊 Sortable table with abbreviated care info (e.g. light, water, temp)</li>
                 <li>🔍 Filter and search plants by name, conditions, or tags</li>
-            </ul>
-        </section>
-
-        <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-green-700 mb-4">About Me</h2>
-            <p>
-                I’m a plant lover and engineer who built PlantSage to make plant care a little simpler (and to stop over-Googling every watering question). It started as a personal project but turned into something I genuinely enjoy growing.
-            </p>
-            <p className="mt-4">
-                When I'm not coding, you might find me:
-            </p>
-            <ul className="list-disc list-inside space-y-2 mt-2 mb-4">
-                <li>Working at Intel Foundry Services as a Product Development Engineer</li>
-                <li>Studying for my Master’s in Computer Science at Georgia Tech</li>
-                <li>Teaching my old German Shepherd, Bruce, some new tricks</li>
-                <li>Exploring national parks</li>
-                <li>Tending to my own little jungle of plants</li>
             </ul>
         </section>
 
@@ -83,6 +67,31 @@ function About() {
             <li><strong>Frontend:</strong> React + TailwindCSS</li>
             <li><strong>Deployment:</strong> AWS EC2 with plans for CI/CD & caching</li>
           </ul>
+        </section>
+
+        <section className="mb-10">
+            <h2 className="text-2xl font-semibold text-green-700 mb-4">About Me</h2>
+            <p>
+                Hi, my name is Ana Ptak, and I'm a plant-loving engineer based in Sacramento, CA. 
+            </p>
+            <p className="mt-4">
+                I achieved my Bachelor's in Electrical Engineering from UC Davis 8 years ago, and started working as a Product Development Engineer at Intel shortly after. 
+                Working with hardware has been great, but the best parts of my job have always been the software tools I use and create for validating and testing products.
+            </p>
+            <p className="mt-4">
+                Recently, I decided to dive deeper into software development and am now pursuing a Master's in Computer Science at Georgia Tech.
+            </p>
+            <p className="mt-4">
+                When I'm not working or studying, you might find me:
+            </p>
+            <ul className="list-disc list-inside space-y-2 mt-2 mb-4">
+                <li>🐕 Teaching my old German Shepherd, Bruce, some new tricks</li>
+                <li>🌿 Tending to my jungle of plants</li>
+                <li>⛰️ Taking amateur photography while exploring national parks</li>
+                <li>🍻 Playing trivia with my friends around Sacramento</li>
+                <li>🎸 Fingerpicking on my trusty old Martin 000X1</li>
+                
+            </ul>
         </section>
 
         <section className="mb-10">
