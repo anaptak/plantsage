@@ -76,9 +76,6 @@ function About() {
             </p>
             <p className="mt-4 text-sm">
                 I achieved my Bachelor's in Electrical Engineering from UC Davis 8 years ago, and started working as a Product Development Engineer at Intel shortly after. 
-                Working with hardware has been great, but the best parts of my job have always been the software tools I use and create for validating and testing products.
-            </p>
-            <p className="mt-4 text-sm">
                 Recently, I decided to dive deeper into software development and am now pursuing a Master's in Computer Science at Georgia Tech.
             </p>
             <p className="mt-4 text-sm">
