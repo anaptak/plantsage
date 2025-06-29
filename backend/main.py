@@ -7,14 +7,13 @@ from openai import OpenAI
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
+from cachetools import LRUCache
 
 load_dotenv()
 
 app = FastAPI()
 
-# In-memory cache and persistent SQLite store
-CACHE_TTL = 3600  # seconds
-cache: dict[str, dict] = {}
+cache = LRUCache(maxsize=int(os.getenv("CACHE_MAXSIZE", 5000)))
 
 def init_db() -> None:
     conn = sqlite3.connect("db.sqlite3")
@@ -53,7 +52,7 @@ def query_plant(plant: str):
 
     # Check in-memory cache
     entry = cache.get(key)
-    if entry and now - entry["timestamp"] < CACHE_TTL:
+    if entry:
         return entry["data"]
 
     # Check persistent cache
@@ -61,7 +60,7 @@ def query_plant(plant: str):
     c = conn.cursor()
     c.execute("SELECT data, timestamp FROM plant_cache WHERE plant=?", (key,))
     row = c.fetchone()
-    if row and now - row[1] < CACHE_TTL:
+    if row:
         data = json.loads(row[0])
         cache[key] = {"data": data, "timestamp": row[1]}
         conn.close()
@@ -109,7 +108,7 @@ def query_plant(plant: str):
         conn = sqlite3.connect("db.sqlite3")
         c = conn.cursor()
         c.execute(
-            "REPLACE INTO plant_cache(plant, data, timestamp) VALUES (?, ?, ?)",
+            "INSERT OR REPLACE INTO plant_cache(plant, data, timestamp) VALUES (?, ?, ?)",
             (key, json.dumps(structured_info), now),
         )
         conn.commit()
