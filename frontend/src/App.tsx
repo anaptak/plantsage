@@ -23,6 +23,8 @@ function App() {
   const handleSubmit = async () => {
     if (!plantName) return;
     try {
+      setSubmitted(false);
+      setResponseData(null);
       setIsLoading(true);
       setLoadingMessage('Getting Plant Info...');
       const apiBase = import.meta.env.VITE_API_URL || "";
@@ -214,7 +216,10 @@ function App() {
                   {loadingMessage}
                 </p>
                 <div className="relative w-60 h-4 bg-green-100 rounded-full overflow-hidden border border-[#18794e]">
-                  <div className="absolute top-0 left-0 h-full bg-[#18794e] rounded-full animate-growBar"></div>
+                  <div
+                    key={plantName + Date.now()}
+                    className="absolute top-0 left-0 h-full bg-[#18794e] rounded-full animate-growBar"
+                    ></div>
                 </div>
               </div>
             )}
