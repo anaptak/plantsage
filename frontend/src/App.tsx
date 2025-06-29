@@ -81,19 +81,29 @@ function App() {
     return (
       <div id="print-area" className="w-full px-4 py-1">
         {plantTitle && (
-          <div className="mb-8 text-center max-w-3xl mx-auto">
-            <h2 className="text-lg text-[#F5E8A8] mb-6 mt-2 no-print">
-              Here's the dirt on...
-            </h2>
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#F5E8A8] font-['Playfair_Display']">
-              {plantTitle}
-            </h2>
-            <p className="mt-3 text-sm sm:text-base text-left text-[#F1F1F1] leading-relaxed px-2">
-              {plantDescription}
-            </p>
+          <div className="relative mt-4 mb-10 text-center max-w-3xl mx-auto">
+            <div 
+              className="absolute inset-0 mx-auto max-w-2xl h-full blur-xl rounded-xl pointer-events-none z-0"
+                style={{
+                  backgroundColor: 'rgba(20, 12, 6, 0.8)',
+                  boxShadow: '0 0 120px 10px rgba(20, 12, 6, 0.6)',
+                  filter: 'blur(24px)',
+                  borderRadius: '1rem',
+                }}
+            />
+            <div className="relative z-10 px-4 py-4">
+              <h2 className="text-lg text-[#F5E8A8] mb-4 no-print">
+                Here's the dirt on...
+              </h2>
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#F5E8A8] font-['Playfair_Display']">
+                {plantTitle}
+              </h2>
+              <p className="mt-3 text-sm sm:text-base text-left text-[#F1F1F1] leading-relaxed px-2">
+                {plantDescription}
+              </p>
+            </div>
           </div>
         )}
-
         <div className="block sm:hidden space-y-4">
           {sectionOrder.map((section) => (
             <div key={section} className="bg-white rounded-xl shadow-lg border border-gray-300 overflow-hidden">

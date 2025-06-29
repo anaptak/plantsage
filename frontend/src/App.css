@@ -24,5 +24,5 @@ td.value {
 }
 
 .animate-growBar {
-  animation: growBar 6s ease-in-out forwards;
+  animation: growBar 8s ease-in-out forwards;
 }
