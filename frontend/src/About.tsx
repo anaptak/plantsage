@@ -92,11 +92,20 @@ function About() {
         </section>
 
         <section className="mb-10">
+            <h2 className="text-xl font-semibold text-green-700 mb-4">Acknowledgements</h2>
+            <ul className="list-disc list-inside space-y-2 mt-2 mb-4 text-sm">
+              <li><a href="https://www.flaticon.com/free-animated-icons/growing-plant" title="growing plant animated icons">Growing plant animated icon created by Freepik - Flaticon</a></li>
+            </ul>
+        </section>
+
+        <section className="mb-10">
           <h2 className="text-2xl font-semibold text-green-700 mb-4">Let’s Connect</h2>
           <p>
             Got feedback or ideas? Want to geek out over plants and code? Feel free to reach out via <a href="mailto:anaptak.dev@email.com" className="underline text-green-700">email</a> or <a href="https://github.com/anaptak" className="underline text-green-700">GitHub</a>.
           </p>
         </section>
+
+
 
         <div className="text-center">
           <a href="/" className="inline-block bg-green-700 text-white px-6 py-3 rounded-full shadow hover:bg-green-800 transition">
