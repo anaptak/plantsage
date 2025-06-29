@@ -17,3 +17,12 @@ td.key {
 td.value {
   width: 60%;
 }
+
+@keyframes growBar {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+.animate-growBar {
+  animation: growBar 6s ease-in-out forwards;
+}
