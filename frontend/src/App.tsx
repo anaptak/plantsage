@@ -85,9 +85,9 @@ function App() {
             <div 
               className="absolute inset-0 mx-auto max-w-2xl h-full blur-xl rounded-xl pointer-events-none z-0"
                 style={{
-                  backgroundColor: 'rgba(20, 12, 6, 0.8)',
-                  boxShadow: '0 0 120px 10px rgba(20, 12, 6, 0.6)',
-                  filter: 'blur(24px)',
+                  backgroundColor: 'rgba(20, 12, 6, 0.75)',
+                  boxShadow: '0 0 100px 10px rgba(20, 12, 6, 0.6)',
+                  filter: 'blur(35px)',
                   borderRadius: '1rem',
                 }}
             />
