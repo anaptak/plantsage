@@ -45,17 +45,31 @@ app.add_middleware(
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+@app.get("/cache_status")
+def cache_status(plant: str):
+    """Return whether cached data exists for the given plant."""
+    key = plant.lower().strip()
+    if key in cache:
+        return {"cached": True, "first_time": False}
+    now = int(time.time())
+    conn = sqlite3.connect("db.sqlite3")
+    c = conn.cursor()
+    c.execute("SELECT timestamp FROM plant_cache WHERE plant=?", (key,))
+    row = c.fetchone()
+    conn.close()
+    if row:
+        return {"cached": True, "first_time": False}
+    return {"cached": False, "first_time": True}
+
 @app.get("/query")
 def query_plant(plant: str):
     key = plant.lower().strip()
     now = int(time.time())
 
-    # Check in-memory cache
     entry = cache.get(key)
     if entry:
-        return entry["data"]
+        return {**entry, "cached": True}
 
-    # Check persistent cache
     conn = sqlite3.connect("db.sqlite3")
     c = conn.cursor()
     c.execute("SELECT data, timestamp FROM plant_cache WHERE plant=?", (key,))
@@ -64,7 +78,7 @@ def query_plant(plant: str):
         data = json.loads(row[0])
         cache[key] = {"data": data, "timestamp": row[1]}
         conn.close()
-        return data
+        return {**data, "cached": True}
     conn.close()
 
     prompt = f"""
@@ -104,7 +118,7 @@ def query_plant(plant: str):
         cleaned = re.sub(r"^```(?:json)?|```$", "", raw_content.strip(), flags=re.MULTILINE).strip()
         structured_info = json.loads(cleaned)
 
-        cache[key] = {"data": structured_info, "timestamp": now}
+        cache[key] = structured_info
         conn = sqlite3.connect("db.sqlite3")
         c = conn.cursor()
         c.execute(
@@ -113,6 +127,6 @@ def query_plant(plant: str):
         )
         conn.commit()
         conn.close()
-        return structured_info
+        return {**structured_info, "cached": False}
     except Exception as e:
         return {"error": str(e)}
