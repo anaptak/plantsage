@@ -23,9 +23,9 @@ function App() {
   const handleSubmit = async () => {
     if (!plantName) return;
     try {
+      setIsLoading(true);
       setSubmitted(false);
       setResponseData(null);
-      setIsLoading(true);
       setLoadingMessage('Getting Plant Info...');
       const apiBase = import.meta.env.VITE_API_URL || "";
       try {
@@ -82,7 +82,7 @@ function App() {
       <div id="print-area" className="w-full px-4 py-1">
         {plantTitle && (
           <div className="mb-8 text-center max-w-3xl mx-auto">
-            <h2 className="text-lg text-[#F5E8A8] mb-6 mt-4 no-print">
+            <h2 className="text-lg text-[#F5E8A8] mb-6 mt-2 no-print">
               Here's the dirt on...
             </h2>
             <h2 className="text-2xl sm:text-3xl font-bold text-[#F5E8A8] font-['Playfair_Display']">
@@ -201,25 +201,27 @@ function App() {
               placeholder="Enter your plant name..."
               className="h-12 text-center px-4 py-3 rounded-2xl w-[260px] shadow-sm border border-[#18794e] bg-gray-50 placeholder:text-gray-500"
             />
-            <Button
-              onClick={handleSubmit}
-              disabled={isLoading}
-              className={`mt-3 px-6 py-5 text-base text-white rounded-[10px] shadow transition-all duration-200 transform ${
-                isLoading ? "bg-[#2c4539]" : "bg-[#18794e] hover:bg-[#2c4539] hover:scale-105"
-              }`}
-            >
-              {isLoading ? "Loading..." : "Get Care Tips"}
-            </Button>
+            {!(isLoading && loadingMessage.includes('Sprouting info')) && (
+              <Button
+                onClick={handleSubmit}
+                disabled={isLoading}
+                className={`mt-3 px-6 py-5 text-base text-white rounded-[10px] shadow transition-all duration-200 transform ${
+                  isLoading ? "bg-[#2c4539]" : "bg-[#18794e] hover:bg-[#2c4539] hover:scale-105"
+                }`}
+              >
+                {isLoading ? "Loading..." : "Get Care Tips"}
+              </Button>
+            )}
             {isLoading && (
-              <div className="mt-4 flex flex-col items-center gap-2">
-                <p className="text-[#2c4539] text-sm font-medium italic animate-pulse">
+              <div className="mt-6 flex flex-col items-center gap-2 px-4">
+               <p className="text-[#1d1f1e] bg-white/90 px-3 py-1 rounded-xl shadow-md">
                   {loadingMessage}
                 </p>
-                <div className="relative w-60 h-4 bg-green-100 rounded-full overflow-hidden border border-[#18794e]">
+                <div className="relative w-60 h-4 bg-green-100 rounded-full overflow-hidden border border-[#18794e] shadow">
                   <div
                     key={plantName + Date.now()}
                     className="absolute top-0 left-0 h-full bg-[#18794e] rounded-full animate-growBar"
-                    ></div>
+                  ></div>
                 </div>
               </div>
             )}
@@ -253,10 +255,6 @@ function App() {
             >
               {isLoading ? (
                 <>
-                  <svg className="animate-spin mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 000 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z" />
-                  </svg>
                   {loadingMessage}
                 </>
               ) : (
