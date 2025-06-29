@@ -7,14 +7,13 @@ from openai import OpenAI
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
+from cachetools import LRUCache
 
 load_dotenv()
 
 app = FastAPI()
 
-# In-memory cache and persistent SQLite store
-CACHE_TTL = float("inf")
-cache: dict[str, dict] = {}
+cache = LRUCache(maxsize=int(os.getenv("CACHE_MAXSIZE", 5000)))
 
 def init_db() -> None:
     conn = sqlite3.connect("db.sqlite3")
