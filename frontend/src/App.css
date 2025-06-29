@@ -26,3 +26,22 @@ td.value {
 .animate-growBar {
   animation: growBar 8s ease-in-out forwards;
 }
+
+@keyframes dotFollow {
+  0% { left: 0%; }
+  100% { left: 100%; }
+}
+
+.progress-icon {
+  position: absolute;
+  bottom: 100%; /* put it above the bar */
+  left: 0%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  background-image: url('/growing-plant.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: dotFollow 8s ease-in-out forwards;
+  pointer-events: none;
+}

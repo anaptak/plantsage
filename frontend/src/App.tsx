@@ -32,7 +32,7 @@ function App() {
         const checkRes = await fetch(`${apiBase}/cache_status?plant=${encodeURIComponent(plantName)}`);
         const check = await checkRes.json();
         if (!check.cached) {
-          setLoadingMessage('🌱 Sprouting info for a new plant... hang tight!');
+          setLoadingMessage('Sprouting info for a new plant... hang tight!');
         }
       } catch (err) {
         console.error('Cache check failed', err);
@@ -232,6 +232,7 @@ function App() {
                     key={plantName + Date.now()}
                     className="absolute top-0 left-0 h-full bg-[#18794e] rounded-full animate-growBar"
                   ></div>
+                <div className="progress-icon"></div>
                 </div>
               </div>
             )}
