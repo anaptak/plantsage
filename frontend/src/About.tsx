@@ -87,8 +87,18 @@ function About() {
                 <li>⛰️ Taking amateur photography while exploring national parks</li>
                 <li>🍻 Playing trivia with my friends around Sacramento</li>
                 <li>🎸 Fingerpicking on my trusty old Martin 000X1</li>
-                
             </ul>
+          <p className="text-sm mt-4">
+            You can check out my personal blog at{" "}
+            <a
+              href="https://anaptak.com"
+              className="underline text-green-700"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              anaptak.com
+            </a>.
+          </p>
         </section>
 
         <section className="mb-10">
