@@ -89,7 +89,7 @@ function About() {
                 <li>🎸 Fingerpicking on my trusty old Martin 000X1</li>
             </ul>
           <p className="text-sm mt-4">
-            You can also check out my personal blog at{" "}
+            You can check out my personal blog at{" "}
             <a
               href="https://anaptak.com"
               className="underline text-green-700"
