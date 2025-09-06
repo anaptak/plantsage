@@ -25,10 +25,10 @@ function About() {
           <h2 className="text-xl font-semibold text-green-700 mb-4">What PlantSage Does</h2>
           <p className="mb-2 text-sm">Just type in a plant name and get tips on:</p>
           <ul className="text-sm list-disc list-inside space-y-2">
-            <li>🌞 Light, temperature, and humidity needs</li>
-            <li>🌱 Soil type, container info, and pH preferences</li>
-            <li>💧 Watering, fertilizing, pruning advice, and more</li>
-            <li>🖨️ Print-friendly care tables</li>
+            <li>Light, temperature, and humidity needs</li>
+            <li>Soil type, container info, and pH preferences</li>
+            <li>Watering, fertilizing, pruning advice, and more</li>
+            <li>Print-friendly care tables</li>
           </ul>
           <p className="text-sm mt-8">
             Results are generated live using GPT-4o then formatted for readability with a clean, mobile-friendly UI built from scratch.
@@ -52,11 +52,11 @@ function About() {
             <h2 className="text-xl font-semibold text-green-700 mb-4">What’s Next</h2>
             <p>Here are some new features I'm planning next:</p>
             <ul className="list-disc list-inside space-y-2 mt-4 text-sm">
-                <li>📷 Plant identification tool</li>
-                <li>🌿 Personal garden to save and organize your plants</li>
-                <li>📍 Define rooms/locations with survivability insights</li>
-                <li>📊 Sortable table with abbreviated care info (e.g. light, water, temp)</li>
-                <li>🔍 Filter and search plants by name, conditions, or tags</li>
+                <li>Plant identification tool</li>
+                <li>Personal garden to save and organize your plants</li>
+                <li>Define rooms/locations with survivability insights</li>
+                <li>Sortable table with abbreviated care info (e.g. light, water, temp)</li>
+                <li>Filter and search plants by name, conditions, or tags</li>
             </ul>
         </section>
 
@@ -82,11 +82,11 @@ function About() {
                 When I'm not working or studying, you might find me:
             </p>
             <ul className="list-disc list-inside space-y-2 mt-2 mb-4 text-sm">
-                <li>🐕 Teaching my old German Shepherd, Bruce, some new tricks</li>
-                <li>🌿 Tending to my jungle of plants</li>
-                <li>⛰️ Taking amateur photography while exploring national parks</li>
-                <li>🍻 Playing trivia with my friends around Sacramento</li>
-                <li>🎸 Fingerpicking on my trusty old Martin 000X1</li>
+                <li>Teaching my old German Shepherd, Bruce, some new tricks</li>
+                <li>Tending to my jungle of plants</li>
+                <li>Taking amateur photography while exploring national parks</li>
+                <li>Playing trivia with my friends around Sacramento</li>
+                <li>Fingerpicking on my trusty old Martin 000X1</li>
             </ul>
           <p className="text-sm mt-4">
             You can check out my personal blog at{" "}
